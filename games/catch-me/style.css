@@ -1,0 +1,391 @@
+body {
+    text-align: center;
+    /* Kid-friendly, readable default font */
+    font-family: "Trebuchet MS", "Comic Sans MS", Arial, sans-serif;
+    background: linear-gradient(to right, #74ebd5, #acb6e5);
+    color: #fff;
+    font-size: 20px;
+}
+
+#menu {
+    margin-top: 50px;
+}
+
+h1, h2 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.board-btn {
+    font-size: 28px;
+    margin: 10px;
+    padding: 15px;
+    border: none;
+    background-color: #ff6b6b;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.board-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Selected (clicked) times-table button */
+.board-btn:not(.mixed-btn)[aria-pressed="true"]{
+    background: linear-gradient(180deg, #1dd1a1, #10ac84);
+    color: #083b2a;
+    border: 2px solid rgba(255,255,255,0.55);
+}
+
+/* Selected state for Mixed button (keep it orange, add a clear outline) */
+.mixed-btn[aria-pressed="true"]{
+    outline: 4px solid rgba(255,255,255,0.65);
+    border: 2px solid rgba(255,255,255,0.55);
+}
+
+
+#game-container {
+    margin-top: 30px;
+    position: relative;
+}
+
+#endGame {
+    position: absolute;
+    bottom: 10px;     /*⬅️ Move to bottom */
+    right: 10px;      /* ⬅️ Align to right */
+    font-size: 16px;  /* ✅ Original size */
+    padding: 8px 12px;    /* ✅ Original padding */
+    background-color: #ff4757;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 11;      /* Stay above other elements */
+}
+
+#question {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.55);
+}
+
+canvas {
+    background: lightblue;
+    display: block;
+    margin: 20px auto;
+    border: 3px solid black;
+    border-radius: 10px;
+}
+
+#stats {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    text-align: right;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.5); /* Slight background for readability */
+    padding: 10px 15px;
+    border-radius: 10px;
+    z-index: 10;
+}
+
+
+#stats span {
+    color: #ffdd57;
+}
+
+/* End Screen Styling */
+#end-screen {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: #fff;
+    background: #2c3e50;
+    padding: 30px;
+    border-radius: 15px;
+    width: 80%;
+    margin: 30px auto;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+#end-screen h1 {
+    font-size: 40px;
+    color: #ffdd57;
+}
+
+#end-screen p {
+    font-size: 28px;
+    margin: 15px 0;
+}
+
+button {
+    font-size: 24px;
+    padding: 14px;
+    background-color: #ff9f43;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #ff6b6b;
+}
+
+.mode-btn {
+    font-size: 24px;
+    margin: 10px;
+    padding: 12px 20px;
+    border: none;
+    background-color: #0984e3;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.mode-btn:hover {
+    background-color: #74b9ff;
+}
+
+#mode-selection-in-game {
+    position: absolute;
+    top: 80px;
+    left: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 12;
+}
+
+/* Timed / Untimed buttons (same vibe as speed buttons) */
+.timing-btn {
+    font-size: 24px;
+    margin: 10px;
+    padding: 12px 20px;
+    border: none;
+    background-color: #0984e3;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.timing-btn:hover {
+    background-color: #74b9ff;
+}
+
+.timing-btn[aria-pressed="true"] {
+    outline: 4px solid rgba(255, 255, 255, 0.65);
+}
+
+
+#mode-selection-in-game .mode-btn {
+    font-size: 16px;
+    padding: 8px 12px;
+    width: 100px;
+    background-color: #0984e3;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: left;
+    padding-left: 10px;
+}
+
+#mode-selection-in-game .mode-btn:hover {
+    background-color: #74b9ff;
+}
+
+
+
+/* --- Added for Mixed Mode + kid-friendly look --- */
+
+/* Hide mode buttons until a table is chosen */
+#mode-selection, #mode-title { display: none; }
+
+/* Menu panel */
+#menu {
+    max-width: 860px;
+    margin: 40px auto 0;
+    padding: 22px 18px;
+    background: rgba(255,255,255,0.12);
+    border: 2px solid rgba(255,255,255,0.25);
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+    backdrop-filter: blur(6px);
+}
+
+#rules {
+    max-width: 760px;
+    margin: 0 auto 18px;
+    background: rgba(0,0,0,0.15);
+    border-radius: 14px;
+    padding: 14px 16px;
+    text-align: left;
+}
+
+/* Bigger, high-contrast rules text for young kids */
+#rules p {
+    color: #fff;
+    font-size: 24px;
+    line-height: 1.35;
+    margin: 10px 0;
+}
+
+#rules strong { color: #ffdd57; }
+
+/* Make the whole page feel more “gamey” */
+body {
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(255,255,255,0.22), transparent 35%),
+      radial-gradient(circle at 80% 10%, rgba(255,255,255,0.18), transparent 30%),
+      radial-gradient(circle at 70% 90%, rgba(255,255,255,0.16), transparent 35%),
+      linear-gradient(135deg, #6dd5ed 0%, #2193b0 50%, #7f53ac 100%);
+}
+
+/* Buttons look a bit more “toy-like” */
+.board-btn, .mode-btn, button {
+    box-shadow: 0 8px 0 rgba(0,0,0,0.18);
+}
+.board-btn:active, .mode-btn:active, button:active {
+    transform: translateY(3px);
+    box-shadow: 0 5px 0 rgba(0,0,0,0.18);
+}
+
+.mixed-btn {
+    background: linear-gradient(180deg, #feca57, #ff9f43);
+    color: #2d3436;
+}
+
+/* Mixed panel */
+#mixed-panel {
+    display: none;
+    max-width: 620px;
+    margin: 12px auto 0;
+    padding: 14px 16px;
+    background: rgba(255,255,255,0.14);
+    border: 2px dashed rgba(255,255,255,0.35);
+    border-radius: 14px;
+    color: #fff;
+}
+
+#mixed-panel.show { display: block; }
+
+.mixed-hint { margin: 6px 0 10px; font-size: 22px; }
+
+.mixed-checkboxes {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(90px, 1fr));
+    gap: 10px;
+    justify-items: center;
+    margin: 10px 0;
+}
+
+.mixed-checkboxes label {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 12px;
+    background: rgba(0,0,0,0.18);
+    border: 1px solid rgba(255,255,255,0.18);
+    cursor: pointer;
+    user-select: none;
+    font-size: 22px;
+}
+
+.mixed-checkboxes input { transform: scale(1.35); margin-right: 8px; }
+
+.mixed-count { margin: 6px 0 0; font-size: 22px; }
+
+/* Canvas polish */
+canvas {
+    background: transparent; /* we draw the background in JS */
+    border: 3px solid rgba(255,255,255,0.6);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+}
+
+/* --- Language selector --- */
+#language-selection.panel{
+  max-width: 760px;
+  margin: 0 auto 18px;
+  background: rgba(0,0,0,0.15);
+  border-radius: 14px;
+  padding: 14px 16px;
+}
+.lang-row{
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+.lang-btn{
+  font-size: 22px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  border: 2px solid rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.16);
+  color:#fff;
+  cursor:pointer;
+  box-shadow: 0 8px 0 rgba(0,0,0,0.18);
+}
+.lang-btn[aria-pressed="true"]{
+  background: rgba(255,255,255,0.28);
+  border-color: rgba(255,255,255,0.55);
+}
+.hint{
+  margin: 10px 0 0;
+  font-size: 20px;
+  color: rgba(255,255,255,0.9);
+}
+
+
+
+/* --- In-game HUD: small “buttons” for Timer / Attempts / Correct --- */
+#hud{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    z-index: 10;
+}
+
+.hud-chip{
+    background: rgba(0, 0, 0, 0.45);
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 16px;
+    font-weight: 800;
+    color: #fff;
+    backdrop-filter: blur(4px);
+}
+
+.hud-label{ color:#fff; }
+.hud-number{ color:#ffdd57; }
+.hud-unit{ color: rgba(255,255,255,0.9); margin-left: 4px; }
+
+/* Play mode (Timed/Untimed) section */
+#timing-selection{
+    margin: 10px 0 6px;
+}
+
+/* Slot-launched mode: prevent pupils from changing the assigned timed/untimed mode. */
+.timing-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  filter: grayscale(0.35);
+}

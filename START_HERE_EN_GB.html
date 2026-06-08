@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MathArcade:Multiplication Quest! (MMQ!) Game Kit - English UK</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Comic Sans MS", "Trebuchet MS", Arial, sans-serif;
+      color: #223044;
+      background: linear-gradient(135deg, #fff7d6, #e9f6ff 45%, #f3e9ff);
+      min-height: 100vh;
+    }
+    .wrap { width: min(1120px, calc(100% - 28px)); margin: 0 auto; padding: 24px 0 36px; }
+    .hero, .card, .warning, .links {
+      background: rgba(255,255,255,.95);
+      border: 1px solid rgba(15,23,42,.12);
+      border-radius: 22px;
+      box-shadow: 0 16px 40px rgba(15,23,42,.12);
+    }
+    .hero { padding: 26px; margin-bottom: 18px; }
+    .topbar { display: flex; justify-content: space-between; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .hero h1 { margin: 0; font-size: clamp(2rem, 5vw, 4rem); line-height: 1.05; }
+    .hero p { margin: 12px 0 0; color: #64748b; font-size: 1.05rem; line-height: 1.55; }
+    .language-links { display: flex; gap: 8px; flex-wrap: wrap; }
+    .warning { padding: 16px 20px; margin-bottom: 18px; border-left: 8px solid #f97316; line-height: 1.55; }
+    .warning strong { color: #c2410c; }
+    .section-title { margin: 28px 0 12px; font-size: 1.55rem; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .card { padding: 20px; }
+    .full { grid-column: 1 / -1; }
+    .tag {
+      display: inline-block; padding: 7px 12px; border-radius: 999px;
+      background: #e0f2fe; color: #075985; font-weight: 900; font-size: .9rem; margin-bottom: 10px;
+    }
+    .green { background: #dcfce7; color: #166534; }
+    .purple { background: #ede9fe; color: #5b21b6; }
+    .orange { background: #ffedd5; color: #9a3412; }
+    .card h2 { margin: 0 0 8px; font-size: 1.45rem; }
+    .card p { margin: 0 0 16px; color: #64748b; line-height: 1.5; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn, .plain-link {
+      display: inline-flex; align-items: center; justify-content: center; min-height: 48px;
+      padding: 12px 18px; border-radius: 15px; font: inherit; font-weight: 900;
+      text-decoration: none; cursor: pointer; user-select: none;
+    }
+    .btn { background: #2563eb; color: white; }
+    .btn:hover { background: #1d4ed8; }
+    .plain-link { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
+    .plain-link:hover { background: #dbeafe; }
+    .links { margin-top: 20px; padding: 20px; }
+    .links h2 { margin: 0 0 12px; }
+    .links ul { margin: 0; padding-left: 20px; color: #475569; line-height: 1.8; }
+    .links a { color: #1d4ed8; font-weight: 800; }
+    video { width: 100%; max-height: 520px; border-radius: 18px; background: #0f172a; margin-top: 12px; }
+    @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } .full { grid-column: auto; } }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div class="topbar">
+        <h1>MathArcade:Multiplication Quest! (MMQ!) Game Kit</h1>
+        <nav class="language-links" aria-label="Language versions">
+          <a class="plain-link" href="START_HERE.html">Language Menu</a>
+          <a class="plain-link" href="START_HERE_ZH_CN.html">简体中文</a>
+        </nav>
+      </div>
+      <p>Start from this page. Pupils choose the slot first, then choose the game they want to play.</p>
+    </section>
+
+    <section class="warning">
+      <strong>Important:</strong> Please extract/unzip the folder first. Then open <strong>START_HERE.html</strong>. If you open this page inside the ZIP preview, the buttons may not open the games.
+    </section>
+
+    <h2 class="section-title">1. Motivation Slot</h2>
+    <section class="grid">
+      <article class="card full">
+        <span class="tag orange">Introduction</span>
+        <h2>Introduction Song</h2>
+        <p>Use this before pupils begin the multiplication game activities.</p>
+        <div class="actions">
+          <a class="btn" href="media/introduction-song.mp4">Play Song</a>
+          <a class="plain-link" href="media/introduction-song.mp4" target="_blank" rel="noopener">Open in New Tab</a>
+          <a class="plain-link" href="media/introduction-song.mp4">Direct Link</a>
+        </div>
+        <video controls preload="metadata" src="media/introduction-song.mp4"></video>
+      </article>
+    </section>
+
+    <h2 class="section-title">2. Cognitive Support Slot</h2>
+    <section class="grid">
+      <article class="card">
+        <span class="tag">Cognitive Support</span>
+        <h2>Array Model Game</h2>
+        <p>For understanding multiplication through rows, columns, and equal groups.</p>
+        <div class="actions">
+          <a class="btn" href="games/array-model/index.html?lang=en">Play Game</a>
+          <a class="plain-link" href="games/array-model/index.html?lang=en" target="_blank" rel="noopener">New Tab</a>
+          <a class="plain-link" href="games/array-model/index.html?lang=en">Direct Link</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="tag">Cognitive Support</span>
+        <h2>Chair Arrangement Game</h2>
+        <p>For understanding multiplication using a classroom arrangement context.</p>
+        <div class="actions">
+          <a class="btn" href="games/chair-arrangement/index.html?lang=en">Play Game</a>
+          <a class="plain-link" href="games/chair-arrangement/index.html?lang=en" target="_blank" rel="noopener">New Tab</a>
+          <a class="plain-link" href="games/chair-arrangement/index.html?lang=en">Direct Link</a>
+        </div>
+      </article>
+    </section>
+
+    <h2 class="section-title">3. Procedural Practice Slot</h2>
+    <section class="grid">
+      <article class="card">
+        <span class="tag green">Untimed Practice</span>
+        <h2>Popubbles! — Untimed</h2>
+        <p>Pupils practise multiplication facts without time pressure.</p>
+        <div class="actions">
+          <a class="btn" href="games/popubbles/index.html?lang=en&amp;mode=untimed&amp;slot=procedural&amp;lockTiming=1">Play Untimed</a>
+          <a class="plain-link" href="games/popubbles/index.html?lang=en&amp;mode=untimed&amp;slot=procedural&amp;lockTiming=1" target="_blank" rel="noopener">New Tab</a>
+          <a class="plain-link" href="games/popubbles/index.html?lang=en&amp;mode=untimed&amp;slot=procedural&amp;lockTiming=1">Direct Link</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="tag green">Untimed Practice</span>
+        <h2>Catch Me! — Untimed</h2>
+        <p>Pupils practise multiplication facts without time pressure.</p>
+        <div class="actions">
+          <a class="btn" href="games/catch-me/index.html?lang=en&amp;timing=untimed&amp;slot=procedural&amp;lockTiming=1">Play Untimed</a>
+          <a class="plain-link" href="games/catch-me/index.html?lang=en&amp;timing=untimed&amp;slot=procedural&amp;lockTiming=1" target="_blank" rel="noopener">New Tab</a>
+          <a class="plain-link" href="games/catch-me/index.html?lang=en&amp;timing=untimed&amp;slot=procedural&amp;lockTiming=1">Direct Link</a>
+        </div>
+      </article>
+    </section>
+
+    <h2 class="section-title">4. Fluency Reinforcement Slot</h2>
+    <section class="grid">
+      <article class="card full">
+        <span class="tag green">Reinforcement</span>
+        <h2>Multiplication Board Game</h2>
+        <p>Board-style repeated practice for fluency reinforcement.</p>
+        <div class="actions">
+          <a class="btn" href="games/multiplication-board/menu.html?lang=en-GB">Play Game</a>
+          <a class="plain-link" href="games/multiplication-board/menu.html?lang=en-GB" target="_blank" rel="noopener">New Tab</a>
+          <a class="plain-link" href="games/multiplication-board/menu.html?lang=en-GB">Direct Link</a>
+        </div>
+      </article>
+    </section>
+
+    <h2 class="section-title">5. Fluency Competency Slot</h2>
+    <section class="grid">
+      <article class="card">
+        <span class="tag purple">Timed Competency</span>
+        <h2>Popubbles! — Timed</h2>
+        <p>Pupils play in timed mode for fluency competency checking.</p>
+        <div class="actions">
+          <a class="btn" href="games/popubbles/index.html?lang=en&amp;mode=timed&amp;slot=competency&amp;lockTiming=1">Play Timed</a>
+          <a class="plain-link" href="games/popubbles/index.html?lang=en&amp;mode=timed&amp;slot=competency&amp;lockTiming=1" target="_blank" rel="noopener">New Tab</a>
+          <a class="plain-link" href="games/popubbles/index.html?lang=en&amp;mode=timed&amp;slot=competency&amp;lockTiming=1">Direct Link</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="tag purple">Timed Competency</span>
+        <h2>Catch Me! — Timed</h2>
+        <p>Pupils play in timed mode for fluency competency checking.</p>
+        <div class="actions">
+          <a class="btn" href="games/catch-me/index.html?lang=en&amp;timing=timed&amp;slot=competency&amp;lockTiming=1">Play Timed</a>
+          <a class="plain-link" href="games/catch-me/index.html?lang=en&amp;timing=timed&amp;slot=competency&amp;lockTiming=1" target="_blank" rel="noopener">New Tab</a>
+          <a class="plain-link" href="games/catch-me/index.html?lang=en&amp;timing=timed&amp;slot=competency&amp;lockTiming=1">Direct Link</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="links">
+      <h2>Plain Direct Links</h2>
+      <ul>
+        <li><a href="media/introduction-song.mp4">Introduction Song</a></li>
+        <li><a href="games/array-model/index.html?lang=en">Array Model Game</a></li>
+        <li><a href="games/chair-arrangement/index.html?lang=en">Chair Arrangement Game</a></li>
+        <li><a href="games/popubbles/index.html?lang=en&amp;mode=untimed&amp;slot=procedural&amp;lockTiming=1">Popubbles! — Procedural Practice Slot, Untimed</a></li>
+        <li><a href="games/catch-me/index.html?lang=en&amp;timing=untimed&amp;slot=procedural&amp;lockTiming=1">Catch Me! — Procedural Practice Slot, Untimed</a></li>
+        <li><a href="games/multiplication-board/menu.html?lang=en-GB">Multiplication Board Game — Fluency Reinforcement Slot</a></li>
+        <li><a href="games/popubbles/index.html?lang=en&amp;mode=timed&amp;slot=competency&amp;lockTiming=1">Popubbles! — Fluency Competency Slot, Timed</a></li>
+        <li><a href="games/catch-me/index.html?lang=en&amp;timing=timed&amp;slot=competency&amp;lockTiming=1">Catch Me! — Fluency Competency Slot, Timed</a></li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

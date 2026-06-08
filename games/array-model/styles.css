@@ -1,0 +1,803 @@
+html, body{ height:100%; margin:0; overflow:hidden; }
+:root{
+  --cell-size: 64px;
+  --label-size: 120px;
+  --grid-gap: 6px;
+  --card-bg: rgba(255,255,255,0.92);
+  --shadow: 0 12px 30px rgba(0,0,0,0.12);
+  --radius: 22px;
+  --cell-bg: #e9fff5;
+  --cell-selected-bg: #bfe9ff;
+}
+
+*{ box-sizing:border-box; }
+
+body{
+  margin:0;
+  font-size: 18px;
+  min-height:100vh;
+  height:100vh;
+  height:100dvh;
+  overflow:hidden;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  color:#1f2937;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+
+  /* fun background */
+  background:
+    radial-gradient(circle at 12% 18%, rgba(255,233,148,0.9), transparent 40%),
+    radial-gradient(circle at 78% 22%, rgba(157,233,255,0.9), transparent 40%),
+    radial-gradient(circle at 35% 85%, rgba(255,170,219,0.85), transparent 45%),
+    radial-gradient(circle at 88% 78%, rgba(173,255,195,0.85), transparent 45%),
+    linear-gradient(180deg, #f7fbff 0%, #ffffff 100%);
+}
+
+/* Language-specific fonts */
+body[data-lang="en"]{
+  font-family: "Comic Sans MS","Comic Sans","Trebuchet MS","Segoe UI",system-ui,-apple-system,sans-serif;
+}
+body[data-lang="zh"]{
+  font-family: "Kaiti","KaiTi","STKaiti","KaiTi_GB2312","Noto Serif SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+}
+
+.topbar{
+  width:min(1050px, 94vw);
+  margin: 8px 0 4px;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  background: var(--card-bg);
+  box-shadow: var(--shadow);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 16px;
+}
+
+.brand{
+  display:flex;
+  gap: 12px;
+  align-items:center;
+}
+
+.logo{
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  display:grid;
+  place-items:center;
+  font-size: 30px;
+  background: linear-gradient(135deg, rgba(255,212,87,0.9), rgba(120,210,255,0.9));
+  box-shadow: 0 10px 18px rgba(0,0,0,0.12);
+}
+
+.brand-text h1{
+  font-size: 24px;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.subtitle{
+  margin: 4px 0 0;
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+.controls{
+  display:flex;
+  gap: 10px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+
+.chip{
+  border: 0;
+  padding: 10px 12px;
+  border-radius: 999px;
+  cursor:pointer;
+  font-weight: 700;
+  background: rgba(31,41,55,0.08);
+  transition: transform 120ms ease, background 120ms ease;
+  user-select:none;
+}
+
+.chip:hover{ transform: translateY(-1px); background: rgba(31,41,55,0.12); }
+.chip.active{
+  background: linear-gradient(135deg, rgba(255,212,87,0.9), rgba(120,210,255,0.9));
+  box-shadow: 0 10px 18px rgba(0,0,0,0.12);
+}
+
+main.container{ flex:1; min-height:0; }
+
+.container{
+  width:min(1050px, 94vw);
+  display:flex;
+  flex: 1;
+  align-items: stretch;
+  justify-content:center;
+  padding: 6px 0 12px;
+  min-height: 0;
+}
+
+.centered{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  min-height: 0;
+}
+
+.hidden{ display:none; }
+
+.card{
+  width:100%;
+  max-height: 100%;
+  overflow: hidden;
+  display:flex;
+  flex-direction:column;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px 16px 20px;
+  height: 100%;
+  min-height: 0;
+}
+
+.card-title{
+  margin: 0 0 12px;
+  font-size: clamp(24px, 3.2vh, 34px);
+}
+
+/* Learning screen layout (bigger, clearer arrays) */
+.learn-layout{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+}
+
+.learn-panel{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.learn-grid-area{
+  flex: 1;
+  min-height: 0;
+}
+
+@media (min-width: 720px){
+  .learn-layout{
+    grid-template-columns: 380px 1fr;
+    align-items: stretch;
+  }
+  .learn-panel{
+    align-items: stretch;
+  }
+  .learn-panel .input-group,
+  .learn-panel .button-group{
+    justify-content: flex-start;
+  }
+/* Force the two main buttons (Generate / Practise) to sit side-by-side */
+.learn-panel .button-group{
+  flex-wrap: nowrap;
+}
+.learn-panel .button-group .btn{
+  flex: 1 1 0;
+  justify-content: center;
+  min-width: 0;
+}
+
+  .learn-panel .concept-note,
+  .learn-panel .equation,
+  .learn-panel .hint{
+    width: 100%;
+  }
+}
+
+.practice-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+/* Times table picker (practice) */
+.practice-table-pick{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.75);
+  border: 2px solid rgba(31,41,55,0.10);
+}
+
+.table-label{
+  font-weight: 900;
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+.table-select{
+  appearance: none;
+  -webkit-appearance: none;
+  border: 2px solid rgba(31,41,55,0.14);
+  background: #fff;
+  border-radius: 999px;
+  padding: 8px 34px 8px 14px;
+  font-weight: 900;
+  font-size: 16px;
+  cursor: pointer;
+  position: relative;
+}
+
+.table-select:focus{
+  outline: none;
+  border-color: rgba(59,130,246,0.7);
+  box-shadow: 0 0 0 4px rgba(59,130,246,0.15);
+}
+
+/* little dropdown arrow */
+.practice-table-pick{
+  position: relative;
+}
+.practice-table-pick::after{
+  content: "▾";
+  position: absolute;
+  right: 16px;
+  pointer-events: none;
+  font-weight: 1000;
+  opacity: 0.7;
+}
+
+/* Practice layout: give the array more room (bigger boxes) */
+.practice-layout{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+}
+
+.practice-left, .practice-right{
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.practice-left #practiceArrayContainer{
+  flex: 1;
+  min-height: 0;
+}
+
+@media (min-width: 720px){
+  .practice-layout{
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: stretch;
+  }
+  .practice-right{
+    justify-content: flex-start;
+  }
+}
+
+.input-group{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 920px;
+  margin: 10px auto;
+}
+
+.input-pair{
+  display:flex;
+  align-items:center;
+  gap: 12px;
+}
+
+.input-pair label{
+  white-space: nowrap;
+  text-align: left;
+}
+
+.input-pair input{
+  width: min(140px, 28vw);
+}
+label{
+  font-weight: 900;
+  font-size: clamp(18px, 2.6vh, 24px);
+}
+
+input[type="number"]{
+  width: 112px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 2px solid rgba(31,41,55,0.14);
+  outline: none;
+  font-size: clamp(20px, 3vh, 28px);
+  text-align:center;
+  background: #fff;
+}
+
+input[type="number"]:focus{
+  border-color: rgba(59,130,246,0.7);
+  box-shadow: 0 0 0 4px rgba(59,130,246,0.15);
+}
+
+.button-group{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap: 10px;
+  margin: 10px 0 8px;
+}
+
+.btn{
+  border: 0;
+  cursor:pointer;
+  border-radius: 18px;
+  padding: 14px 16px;
+  font-weight: 900;
+  font-size: clamp(18px, 2.6vh, 24px);
+
+  display:flex;
+  align-items:center;
+  gap: 8px;
+  transition: transform 120ms ease, box-shadow 120ms ease, filter 120ms ease;
+  user-select:none;
+}
+
+.btn:hover{ transform: translateY(-1px); filter: brightness(1.02); }
+.btn:active{ transform: translateY(0px) scale(0.98); }
+
+
+/* Unified main buttons: same light-blue background */
+#btnGenerate, #btnPractice{
+  background: rgba(191,233,255,0.95);
+  color: #0b1220;
+  box-shadow: 0 10px 18px rgba(0,0,0,0.12);
+}
+#btnGenerate:hover, #btnPractice:hover{ filter: brightness(1.03); }
+
+.primary{
+  background: linear-gradient(135deg, rgba(34,197,94,0.95), rgba(59,130,246,0.95));
+  color: #0b1220;
+  box-shadow: 0 10px 18px rgba(0,0,0,0.12);
+}
+
+.secondary{
+  background: linear-gradient(135deg, rgba(255,212,87,0.95), rgba(255,99,170,0.92));
+  color:#111827;
+  box-shadow: 0 10px 18px rgba(0,0,0,0.12);
+}
+
+.ghost{
+  background: rgba(31,41,55,0.08);
+  color:#111827;
+}
+
+.smallbtn{
+  padding: 10px 12px;
+  border-radius: 14px;
+  font-size: 14px;
+}
+
+.equation{
+  margin-top: 8px;
+  font-size: clamp(22px, 3vh, 30px);
+  font-weight: 1000;
+}
+
+.equation.small{
+  font-size: clamp(18px, 2.6vh, 24px);
+  font-weight: 900;
+  opacity: 0.95;
+}
+
+.hint{
+  margin: 10px 0 0;
+  font-size: clamp(16px, 2.4vh, 22px);
+  opacity: 0.9;
+}
+
+.concept-note{
+  margin: 8px 0 10px;
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: rgba(59,130,246,0.10);
+  border: 2px dashed rgba(59,130,246,0.25);
+  font-weight: 900;
+  font-size: clamp(18px, 2.6vh, 26px);
+  width: min(860px, 100%);
+}
+
+.question{
+  margin: 10px 0 6px;
+  font-size: clamp(26px, 3.6vh, 40px);
+  font-weight: 1000;
+}
+
+#arrayContainer, #practiceArrayContainer{
+  position: relative;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  margin-top: 6px;
+  padding: 0;
+  display:flex;
+  align-items:stretch;
+  justify-content:center;
+}
+
+
+.grid-container{
+  display:grid;
+  gap: var(--grid-gap);
+  align-items:stretch;
+  justify-items:stretch;
+  width: fit-content;
+  max-width: 100%;
+  max-height: 100%;
+  padding: 0;
+  overflow: visible;
+}
+
+.label-cell{
+  padding: 0;
+  border-radius: clamp(12px, 1.6vh, 18px);
+  font-weight: 900;
+  font-size: clamp(14px, calc(var(--cell-size) * 0.34), 34px);
+  line-height: 1;
+  background: rgba(255,255,255,0.92);
+  border: 2px solid rgba(31,41,55,0.10);
+}
+
+/* Hide column-number header boxes (keep spacing, but remove the "1 2 3" labels + empty boxes) */
+.col-label-cell{
+  background: transparent;
+  border: 0;
+}
+
+/* Corner cell: show the Row/Column stickers instead of a blank box */
+.corner-cell{
+  background: transparent;
+  border: 0;
+}
+
+/* Invisible spacer cells for row labels (keeps grid alignment without showing big 'Row' boxes) */
+.row-spacer{
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.corner-axis{
+  display:flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.corner-sticker{
+  background: rgba(255,255,255,0.92);
+  border: 2px solid rgba(31,41,55,0.10);
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: clamp(18px, 2.4vh, 28px);
+  font-weight: 1000;
+  line-height: 1;
+
+  white-space: nowrap;
+}
+
+button.label-cell{
+  appearance: none;
+  -webkit-appearance: none;
+  background: inherit;
+  border: inherit;
+  font: inherit;
+  color: inherit;
+  text-align: center;
+  width: 100%;
+}
+
+button.label-cell:focus{
+  outline: 3px solid rgba(59,130,246,0.35);
+  outline-offset: 2px;
+}
+
+
+
+.axis-btn{
+  background: #f3f4f6; /* light grey */
+  cursor: pointer;
+}
+.axis-btn:hover{
+  filter: brightness(0.98);
+}
+.axis-btn.active{
+  background: #bbf7d0; /* light green */
+  border-color: rgba(16,185,129,0.55);
+}
+
+.cell{
+  width: 100%;
+  height: var(--cell-size);
+  min-height: 0;
+  border-radius: clamp(10px, 1.8vh, 16px);
+  border: 2px solid rgba(34,197,94,0.80);
+  background: var(--cell-bg);
+  box-shadow: 0 0 0 2px rgba(16,185,129,0.18), 0 0 22px rgba(34,197,94,0.28);
+cursor:pointer;
+  color: rgba(255,255,255,0.88);
+  transition: transform 120ms ease, filter 120ms ease, box-shadow 120ms ease;
+}
+.cell:hover{
+  transform: translateY(-1px);
+  filter: brightness(1.06);
+  box-shadow: 0 10px 16px rgba(0,0,0,0.10);
+}
+
+#learningScreen .cell{
+  background: #A6D47A;           /* before click */
+  border: 2px solid #6FAE43;
+  box-shadow: 0 0 0 2px rgba(111,174,67,0.18);
+}
+
+/* Learning mode: AFTER click (your teal sample) */
+#learningScreen .cell.selected{
+  background: #56B8A7;           /* after click */
+  border-color: #148D77;
+  outline: 3px solid rgba(20,141,119,0.45);
+  outline-offset: -3px;
+  box-shadow: 0 12px 20px rgba(20,141,119,0.22);
+}
+
+/* optional: slightly brighter on hover */
+#learningScreen .cell:hover{
+  filter: brightness(1.03);
+}
+
+
+.cell.selected{
+  background: var(--cell-selected-bg);
+  border-color: rgba(59,130,246,0.85);
+  outline: 3px solid rgba(56,189,248,0.75);
+  outline-offset: -3px;
+  box-shadow: 0 12px 20px rgba(59,130,246,0.25);
+  animation: pop 160ms ease-out;
+}
+@keyframes pop{
+  0%{ transform: scale(0.92); }
+  100%{ transform: scale(1.0); }
+}
+
+.row-label{
+  position:absolute;
+  top:-4px;
+  left: 10px;
+  font-size: 16px;
+  font-weight: 900;
+  background: rgba(255,255,255,0.9);
+  padding: 8px 10px;
+  border-radius: 14px;
+  border: 2px solid rgba(31,41,55,0.10);
+}
+
+.col-label{
+  position:absolute;
+  bottom: -6px;
+  left: 10px;
+  font-size: 16px;
+  font-weight: 900;
+  background: rgba(255,255,255,0.9);
+  padding: 8px 10px;
+  border-radius: 14px;
+  border: 2px solid rgba(31,41,55,0.10);
+}
+
+.feedback{
+  margin-top: 6px;
+  font-size: 18px;
+  font-weight: 900;
+  min-height: 28px;
+}
+
+/* Confetti */
+#confettiLayer{
+  pointer-events:none;
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: 999;
+}
+
+.confetti{
+  position:absolute;
+  top:-12vh;
+  font-size: 26px;
+  opacity: 0.95;
+  animation:
+    fallSlow var(--dur, 4.8s) linear forwards,
+    drift var(--dur, 4.8s) ease-in-out forwards,
+    spinSlow 2200ms linear infinite;
+  filter: drop-shadow(0 6px 8px rgba(0,0,0,0.12));
+  will-change: transform, opacity;
+}
+
+@keyframes fallSlow{
+  to{ transform: translateY(118vh); opacity: 0; }
+}
+
+@keyframes drift{
+  0%{ margin-left: 0; }
+  50%{ margin-left: calc(var(--dx, 0px) * 1); }
+  100%{ margin-left: calc(var(--dx, 0px) * -0.25); }
+}
+
+@keyframes spinSlow{
+  to{ rotate: 360deg; }
+}
+
+
+@media (max-width: 520px){
+  .brand-text h1{ font-size: 20px; }
+  input[type="number"]{ width: 88px; }
+  .cell{ min-height: 46px; }
+}
+
+
+/* Axis guide stickers (Row / Column) */
+.axis-guide{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  align-items:center;
+  margin: 10px 0 6px;
+  flex-wrap: nowrap; /* keep Row and Column side-by-side */
+}
+
+.axis-sticker{
+  background: #f1f1f1;
+  border: 2px solid #dedede;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 22px;
+  font-weight: 800;
+  box-shadow: 0 2px 0 rgba(0,0,0,0.06);
+  line-height: 1;
+  user-select: none;
+}
+
+@media (max-width: 480px){
+  .axis-sticker{ font-size: 20px; padding: 7px 12px; }
+}
+
+
+/* =========================
+   Practice: equation options
+   ========================= */
+.equation-area{
+  flex: 0 0 auto; margin-top: 12px; }
+.equation.jumbo{ font-size: clamp(26px, 3.2vw, 38px); }
+
+.options-grid{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+@media (min-width: 560px){
+  .options-grid{ grid-template-columns: 1fr 1fr; }
+}
+
+.option-btn{
+  font-size: clamp(16px, 2.0vw, 24px);
+  padding: 10px 12px;
+  border-radius: 18px;
+  line-height: 1.05;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: #061a66;
+  color: #f8fafc;
+  border: 3px solid rgba(56,189,248,0.55);
+  box-shadow: 0 0 0 4px rgba(56,189,248,0.12), 0 10px 24px rgba(0,0,0,0.18);
+}
+
+
+.option-btn.disabled{
+  opacity: 0.7;
+}
+
+.option-btn.correct{
+  border: 3px solid rgba(16,185,129,0.95);
+  box-shadow: 0 0 0 5px rgba(16,185,129,0.18), 0 14px 30px rgba(0,0,0,0.22);
+}
+
+.option-btn.wrong{
+  border: 3px solid rgba(239,68,68,0.95);
+  box-shadow: 0 0 0 5px rgba(239,68,68,0.18), 0 14px 30px rgba(0,0,0,0.22);
+}
+
+
+.feedback.ok{
+  color: rgba(16,185,129,0.95);
+}
+
+.feedback.bad{
+  color: rgba(239,68,68,0.95);
+}
+
+.cell.locked{
+  cursor: default;
+  pointer-events: none;
+}
+
+.cell.locked:hover{
+  transform: none;
+  filter: none;
+  box-shadow: none;
+}
+
+
+.corner-cell{
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+
+/* Grid sizing via JS */
+.grid-container{ grid-auto-rows: var(--cell-size); }
+.cell{ width: var(--cell-size); height: var(--cell-size); }
+.label-cell{ height: var(--cell-size); display:flex; align-items:center; justify-content:center; }
+
+.scoreboard{
+  margin-left:auto;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.75);
+  border: 2px solid rgba(31,41,55,0.10);
+  font-weight: 900;
+  font-size: 20px;
+}
+@media (max-width: 520px){ .scoreboard{ font-size: 18px; } }
+
+
+/* Repeated addition line */
+.equation.repeated{
+  opacity: 0.92;
+}
+
+/* Practice right panel layout so feedback never gets clipped */
+.practice-right{
+  display:flex;
+  flex-direction:column;
+  min-height:0;
+  gap: 10px;
+  padding: 0 4px 6px;
+}
+
+.practice-right .equation-area{
+  display:flex;
+  flex-direction:column;
+  gap: 10px;
+  min-height:0;
+}
+
+.practice-right .practice-actions{
+  margin-top: auto;
+}

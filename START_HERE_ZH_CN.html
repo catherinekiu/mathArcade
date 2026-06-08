@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MathArcade:Multiplication Quest! (MMQ!) Game Kit - 简体中文</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: KaiTi, "楷体", "Microsoft YaHei", "Noto Sans SC", "Comic Sans MS", Arial, sans-serif;
+      color: #223044;
+      background: linear-gradient(135deg, #fff7d6, #e9f6ff 45%, #f3e9ff);
+      min-height: 100vh;
+      font-size: 18px;
+    }
+    .wrap { width: min(1120px, calc(100% - 28px)); margin: 0 auto; padding: 24px 0 36px; }
+    .hero, .card, .warning, .links {
+      background: rgba(255,255,255,.95);
+      border: 1px solid rgba(15,23,42,.12);
+      border-radius: 22px;
+      box-shadow: 0 16px 40px rgba(15,23,42,.12);
+    }
+    .hero { padding: 26px; margin-bottom: 18px; }
+    .topbar { display: flex; justify-content: space-between; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .hero h1 { margin: 0; font-size: clamp(2rem, 5vw, 4rem); line-height: 1.05; }
+    .hero p { margin: 12px 0 0; color: #64748b; font-size: 1.08rem; line-height: 1.6; }
+    .language-links { display: flex; gap: 8px; flex-wrap: wrap; }
+    .warning { padding: 16px 20px; margin-bottom: 18px; border-left: 8px solid #f97316; line-height: 1.6; }
+    .warning strong { color: #c2410c; }
+    .section-title { margin: 28px 0 12px; font-size: 1.6rem; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .card { padding: 20px; }
+    .full { grid-column: 1 / -1; }
+    .tag {
+      display: inline-block; padding: 7px 12px; border-radius: 999px;
+      background: #e0f2fe; color: #075985; font-weight: 900; font-size: .95rem; margin-bottom: 10px;
+    }
+    .green { background: #dcfce7; color: #166534; }
+    .purple { background: #ede9fe; color: #5b21b6; }
+    .orange { background: #ffedd5; color: #9a3412; }
+    .card h2 { margin: 0 0 8px; font-size: 1.5rem; }
+    .card p { margin: 0 0 16px; color: #64748b; line-height: 1.6; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn, .plain-link {
+      display: inline-flex; align-items: center; justify-content: center; min-height: 50px;
+      padding: 12px 18px; border-radius: 15px; font: inherit; font-weight: 900;
+      text-decoration: none; cursor: pointer; user-select: none;
+    }
+    .btn { background: #2563eb; color: white; }
+    .btn:hover { background: #1d4ed8; }
+    .plain-link { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
+    .plain-link:hover { background: #dbeafe; }
+    .links { margin-top: 20px; padding: 20px; }
+    .links h2 { margin: 0 0 12px; }
+    .links ul { margin: 0; padding-left: 22px; color: #475569; line-height: 1.9; }
+    .links a { color: #1d4ed8; font-weight: 800; }
+    video { width: 100%; max-height: 520px; border-radius: 18px; background: #0f172a; margin-top: 12px; }
+    @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } .full { grid-column: auto; } }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div class="topbar">
+        <h1>MathArcade:Multiplication Quest! (MMQ!) Game Kit</h1>
+        <nav class="language-links" aria-label="语言版本">
+          <a class="plain-link" href="START_HERE.html">语言菜单</a>
+          <a class="plain-link" href="START_HERE_EN_GB.html">English UK</a>
+        </nav>
+      </div>
+      <p>请从此页面开始。学生先选择学习环节，再选择想玩的游戏。</p>
+    </section>
+
+    <section class="warning">
+      <strong>重要：</strong>请先解压整个文件夹，再打开 <strong>START_HERE.html</strong>。如果直接在 ZIP 预览里打开，游戏和歌曲可能无法正常播放。
+    </section>
+
+    <h2 class="section-title">1. 动机导入环节</h2>
+    <section class="grid">
+      <article class="card full">
+        <span class="tag orange">导入</span>
+        <h2>导入歌曲</h2>
+        <p>在学生开始乘法游戏活动前使用。</p>
+        <div class="actions">
+          <a class="btn" href="media/introduction-song.mp4">播放歌曲</a>
+          <a class="plain-link" href="media/introduction-song.mp4" target="_blank" rel="noopener">新标签页打开</a>
+          <a class="plain-link" href="media/introduction-song.mp4">直接链接</a>
+        </div>
+        <video controls preload="metadata" src="media/introduction-song.mp4"></video>
+      </article>
+    </section>
+
+    <h2 class="section-title">2. 认知支持环节</h2>
+    <section class="grid">
+      <article class="card">
+        <span class="tag">认知支持</span>
+        <h2>阵列模型游戏</h2>
+        <p>帮助学生通过行、列和等量分组理解乘法。</p>
+        <div class="actions">
+          <a class="btn" href="games/array-model/index.html?lang=zh">开始游戏</a>
+          <a class="plain-link" href="games/array-model/index.html?lang=zh" target="_blank" rel="noopener">新标签页</a>
+          <a class="plain-link" href="games/array-model/index.html?lang=zh">直接链接</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="tag">认知支持</span>
+        <h2>椅子排列游戏</h2>
+        <p>通过课室椅子排列情境帮助学生理解乘法。</p>
+        <div class="actions">
+          <a class="btn" href="games/chair-arrangement/index.html?lang=zh">开始游戏</a>
+          <a class="plain-link" href="games/chair-arrangement/index.html?lang=zh" target="_blank" rel="noopener">新标签页</a>
+          <a class="plain-link" href="games/chair-arrangement/index.html?lang=zh">直接链接</a>
+        </div>
+      </article>
+    </section>
+
+    <h2 class="section-title">3. 程序性练习环节</h2>
+    <section class="grid">
+      <article class="card">
+        <span class="tag green">无计时练习</span>
+        <h2>Popubbles! — 无计时</h2>
+        <p>学生可以在没有时间压力的情况下练习乘法事实。</p>
+        <div class="actions">
+          <a class="btn" href="games/popubbles/index.html?lang=zh&amp;mode=untimed&amp;slot=procedural&amp;lockTiming=1">无计时模式</a>
+          <a class="plain-link" href="games/popubbles/index.html?lang=zh&amp;mode=untimed&amp;slot=procedural&amp;lockTiming=1" target="_blank" rel="noopener">新标签页</a>
+          <a class="plain-link" href="games/popubbles/index.html?lang=zh&amp;mode=untimed&amp;slot=procedural&amp;lockTiming=1">直接链接</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="tag green">无计时练习</span>
+        <h2>Catch Me! — 无计时</h2>
+        <p>学生可以在没有时间压力的情况下练习乘法事实。</p>
+        <div class="actions">
+          <a class="btn" href="games/catch-me/index.html?lang=zh&amp;timing=untimed&amp;slot=procedural&amp;lockTiming=1">无计时模式</a>
+          <a class="plain-link" href="games/catch-me/index.html?lang=zh&amp;timing=untimed&amp;slot=procedural&amp;lockTiming=1" target="_blank" rel="noopener">新标签页</a>
+          <a class="plain-link" href="games/catch-me/index.html?lang=zh&amp;timing=untimed&amp;slot=procedural&amp;lockTiming=1">直接链接</a>
+        </div>
+      </article>
+    </section>
+
+    <h2 class="section-title">4. 熟练度巩固环节</h2>
+    <section class="grid">
+      <article class="card full">
+        <span class="tag green">巩固练习</span>
+        <h2>乘法棋盘游戏</h2>
+        <p>通过棋盘式重复练习巩固乘法事实熟练度。</p>
+        <div class="actions">
+          <a class="btn" href="games/multiplication-board/menu.html?lang=zh-CN">开始游戏</a>
+          <a class="plain-link" href="games/multiplication-board/menu.html?lang=zh-CN" target="_blank" rel="noopener">新标签页</a>
+          <a class="plain-link" href="games/multiplication-board/menu.html?lang=zh-CN">直接链接</a>
+        </div>
+      </article>
+    </section>
+
+    <h2 class="section-title">5. 熟练度达标检测环节</h2>
+    <section class="grid">
+      <article class="card">
+        <span class="tag purple">计时检测</span>
+        <h2>Popubbles! — 计时</h2>
+        <p>学生使用计时模式进行乘法事实熟练度达标检测。</p>
+        <div class="actions">
+          <a class="btn" href="games/popubbles/index.html?lang=zh&amp;mode=timed&amp;slot=competency&amp;lockTiming=1">计时模式</a>
+          <a class="plain-link" href="games/popubbles/index.html?lang=zh&amp;mode=timed&amp;slot=competency&amp;lockTiming=1" target="_blank" rel="noopener">新标签页</a>
+          <a class="plain-link" href="games/popubbles/index.html?lang=zh&amp;mode=timed&amp;slot=competency&amp;lockTiming=1">直接链接</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="tag purple">计时检测</span>
+        <h2>Catch Me! — 计时</h2>
+        <p>学生使用计时模式进行乘法事实熟练度达标检测。</p>
+        <div class="actions">
+          <a class="btn" href="games/catch-me/index.html?lang=zh&amp;timing=timed&amp;slot=competency&amp;lockTiming=1">计时模式</a>
+          <a class="plain-link" href="games/catch-me/index.html?lang=zh&amp;timing=timed&amp;slot=competency&amp;lockTiming=1" target="_blank" rel="noopener">新标签页</a>
+          <a class="plain-link" href="games/catch-me/index.html?lang=zh&amp;timing=timed&amp;slot=competency&amp;lockTiming=1">直接链接</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="links">
+      <h2>备用直接链接</h2>
+      <ul>
+        <li><a href="media/introduction-song.mp4">导入歌曲</a></li>
+        <li><a href="games/array-model/index.html?lang=zh">阵列模型游戏</a></li>
+        <li><a href="games/chair-arrangement/index.html?lang=zh">椅子排列游戏</a></li>
+        <li><a href="games/popubbles/index.html?lang=zh&amp;mode=untimed&amp;slot=procedural&amp;lockTiming=1">Popubbles! — 程序性练习环节，无计时</a></li>
+        <li><a href="games/catch-me/index.html?lang=zh&amp;timing=untimed&amp;slot=procedural&amp;lockTiming=1">Catch Me! — 程序性练习环节，无计时</a></li>
+        <li><a href="games/multiplication-board/menu.html?lang=zh-CN">乘法棋盘游戏 — 熟练度巩固环节</a></li>
+        <li><a href="games/popubbles/index.html?lang=zh&amp;mode=timed&amp;slot=competency&amp;lockTiming=1">Popubbles! — 熟练度达标检测环节，计时</a></li>
+        <li><a href="games/catch-me/index.html?lang=zh&amp;timing=timed&amp;slot=competency&amp;lockTiming=1">Catch Me! — 熟练度达标检测环节，计时</a></li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

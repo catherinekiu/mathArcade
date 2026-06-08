@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>START HERE - MathArcade:Multiplication Quest! (MMQ!) Game Kit</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Comic Sans MS", "Trebuchet MS", Arial, sans-serif;
+      color: #223044;
+      background: linear-gradient(135deg, #fff7d6, #e9f6ff 45%, #f3e9ff);
+      min-height: 100vh;
+    }
+    .wrap { width: min(1000px, calc(100% - 28px)); margin: 0 auto; padding: 34px 0 42px; }
+    .hero, .card, .notice {
+      background: rgba(255,255,255,.95);
+      border: 1px solid rgba(15,23,42,.12);
+      border-radius: 24px;
+      box-shadow: 0 16px 40px rgba(15,23,42,.12);
+    }
+    .hero { padding: 32px; margin-bottom: 18px; text-align: center; }
+    .hero h1 { margin: 0; font-size: clamp(2.1rem, 6vw, 4.3rem); line-height: 1.05; }
+    .hero p { margin: 14px auto 0; color: #64748b; font-size: 1.12rem; line-height: 1.6; max-width: 780px; }
+    .notice {
+      padding: 18px 22px;
+      margin-bottom: 18px;
+      border-left: 8px solid #f97316;
+      line-height: 1.65;
+      font-size: 1.03rem;
+    }
+    .notice strong { color: #c2410c; }
+    .notice .line { margin: 0; }
+    .notice .line + .line { margin-top: 8px; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 18px; }
+    .card {
+      padding: 28px;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 22px 46px rgba(15,23,42,.16); }
+    .tag { display: inline-block; padding: 8px 14px; border-radius: 999px; background: #e0f2fe; color: #075985; font-weight: 900; font-size: .95rem; margin-bottom: 14px; }
+    .card h2 { margin: 0 0 10px; font-size: 1.75rem; }
+    .card p { margin: 0 0 20px; color: #64748b; line-height: 1.55; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 54px;
+      padding: 12px 22px;
+      border-radius: 16px;
+      background: #2563eb;
+      color: #fff;
+      font-weight: 900;
+      text-decoration: none;
+    }
+    .zh { font-family: KaiTi, "楷体", "Microsoft YaHei", "Noto Sans SC", sans-serif; }
+    .zh-card { font-size: 1.08rem; }
+    @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <h1>MathArcade:Multiplication Quest! (MMQ!) Game Kit</h1>
+      <p>Choose your language version first.<br><span class="zh" lang="zh-Hans">请先选择语言版本。</span></p>
+    </section>
+
+    <section class="notice" aria-label="Important bilingual note">
+      <p class="line"><strong>Important:</strong> Extract/unzip the folder first, then open <strong>START_HERE.html</strong>. Do not open it inside the ZIP preview, or the games and song may not load properly.</p>
+      <p class="line zh" lang="zh-Hans"><strong>重要：</strong>请先解压整个文件夹，然后打开 <strong>START_HERE.html</strong>。请不要直接在 ZIP 预览中打开，否则游戏和歌曲可能无法正常播放。</p>
+    </section>
+
+    <section class="grid" aria-label="Language selection">
+      <a class="card" href="START_HERE_EN_GB.html">
+        <span class="tag">English UK</span>
+        <h2>English UK Game List</h2>
+        <p>Press this button to enter the English UK version of the game list.</p>
+        <span class="btn">Enter English UK</span>
+      </a>
+
+      <a class="card zh zh-card" href="START_HERE_ZH_CN.html" lang="zh-Hans">
+        <span class="tag">简体中文</span>
+        <h2>简体中文游戏目录</h2>
+        <p>点击此按钮进入简体中文版游戏目录。</p>
+        <span class="btn">进入简体中文</span>
+      </a>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Popubbles!</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top bar: game name + language switch -->
+  <div class="topbar" aria-label="Top bar">
+    <div class="brand" id="brand" aria-label="Game name">Popubbles!</div>
+
+    <div class="lang-switch" role="group" aria-label="Language switch">
+      <button class="chip" id="btn-en" type="button" onclick="setLanguage('en')">English (UK)</button>
+      <button class="chip" id="btn-zh" type="button" onclick="setLanguage('zh')">中文</button>
+    </div>
+  </div>
+
+  <!-- Main Menu -->
+  <div id="menu" class="menu active">
+    <div class="title-wrap">
+      <h1 id="main-title">Popubbles!</h1>
+      <p id="main-subtitle" class="subtitle">Pick a times table, then pop the correct answer balloon 🎈</p>
+    </div>
+
+    <!-- Game Rules Section -->
+    <div id="game-rules" aria-label="Game rules">
+      <h2 id="rules-title">Game Rules</h2>
+      <ul>
+        <li id="rule-1">Select a multiplication table to start the game.</li>
+        <li id="rule-2">Click the correct balloon with the right answer.</li>
+        <li id="rule-3">You have a total of <b>20 attempts</b>.</li>
+        <li id="rule-4">Each correct answer earns you points.</li>
+        <li id="rule-5">Try to be quick and accurate for a high score!</li>
+      </ul>
+    </div>
+
+    <!-- Speed mode -->
+    <div class="picker speed" aria-label="Speed mode">
+      <h3 id="speed-title" class="picker-title">Choose game speed</h3>
+      <div class="speed-row" role="group" aria-label="Speed options">
+        <button class="speed-chip" id="speed-slow" type="button">Slow</button>
+        <button class="speed-chip" id="speed-moderate" type="button">Medium</button>
+        <button class="speed-chip" id="speed-fast" type="button">Fast</button>
+      </div>
+      <p id="speed-note" class="picker-subtitle">Tip: Slow is best for beginners. Fast is for speed stars.</p>
+    </div>
+
+    <!-- Time mode -->
+    <div class="picker speed" aria-label="Time mode">
+      <h3 id="time-title" class="picker-title">Time mode</h3>
+      <div class="speed-row" role="group" aria-label="Time mode options">
+        <button class="speed-chip" id="time-timed" type="button">Timed</button>
+        <button class="speed-chip" id="time-untimed" type="button">Untimed</button>
+      </div>
+    </div>
+
+    <!-- Single table mode -->
+    <div class="picker" aria-label="Single table mode">
+      <h3 id="single-picker-title" class="picker-title">Choose your times table</h3>
+      <div id="tables" class="tables"></div>
+    </div>
+
+    <!-- Mixed tables mode -->
+    <div class="picker mixed" aria-label="Mixed times tables mode">
+      <h3 id="mixed-picker-title" class="picker-title">Mixed times tables</h3>
+      <p id="mixed-explain" class="picker-subtitle">Choose exactly <b>3</b> times tables to mix. You will play 20 attempts.</p>
+
+      <div id="mixed-tables" class="tables chips" aria-label="Choose 3 tables"></div>
+
+      <div class="mixed-footer">
+        <div class="mixed-status" aria-live="polite">
+          <span id="mixed-count">0</span>/3
+        </div>
+        <button id="start-mixed-btn" class="primary" type="button" disabled>Start Mixed Game</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Game Screen -->
+  <div id="game" class="game">
+    <div class="hud">
+      <div class="question-pill">
+        <span id="q-label" class="q-label">Question</span>
+        <span id="question" class="q-text"></span>
+      </div>
+
+      <div class="stats">
+        <div class="info"><span class="icon">⭐</span> <span id="label-score">Score</span>: <span id="score">0</span></div>
+        <div class="info"><span class="icon">⏱️</span> <span id="label-time">Time</span>: <span id="timer">0</span> <span id="label-seconds">sec</span></div>
+        <div class="info"><span class="icon">🎯</span> <span id="label-attempt">Attempt</span>: <span id="attempt">1</span><span id="attempt-total">/20</span></div>
+      </div>
+
+      <div class="hud-actions">
+        <div class="speed-inline" aria-label="Speed control">
+          <span id="label-speed-mode" class="speed-inline-label">Speed</span>
+          <button class="speed-mini" id="in-speed-slow" type="button">Slow</button>
+          <button class="speed-mini" id="in-speed-moderate" type="button">Medium</button>
+          <button class="speed-mini" id="in-speed-fast" type="button">Fast</button>
+        </div>
+
+        <div class="speed-inline" aria-label="Time mode control">
+          <span id="label-time-mode" class="speed-inline-label">Time</span>
+          <button class="speed-mini" id="in-time-timed" type="button">Timed</button>
+          <button class="speed-mini" id="in-time-untimed" type="button">Untimed</button>
+        </div>
+        <button id="end-game-btn" class="danger" type="button" disabled>End Game</button>
+      </div>
+
+      <div class="progress-wrap" aria-hidden="true">
+        <div id="progress-bar" class="progress-bar"></div>
+      </div>
+    </div>
+
+    <div class="balloons-container" id="balloons" aria-label="Answer balloons"></div>
+  </div>
+
+  <!-- Game Result -->
+  <div id="result" class="result">
+    <div class="title-wrap">
+      <h2 id="result-title">Game Over!</h2>
+      <p id="result-subtitle" class="subtitle">Nice work. Want to beat your score?</p>
+    </div>
+
+    <div class="result-grid">
+      <div class="result-card">
+        <div id="label-final-time" class="label">Time Spent</div>
+        <div class="value"><span id="final-time"></span> <span id="label-seconds-2">sec</span></div>
+      </div>
+      <div class="result-card">
+        <div id="label-correct" class="label">Correct Responses</div>
+        <div class="value"><span id="correct-answers"></span></div>
+      </div>
+      <div class="result-card">
+        <div id="label-speed" class="label">Speed Rate</div>
+        <div class="value"><span id="speed-rate"></span></div>
+      </div>
+      <div class="result-card">
+        <div id="label-accuracy" class="label">Accuracy Rate</div>
+        <div class="value"><span id="accuracy-rate"></span></div>
+      </div>
+      <div class="result-card">
+        <div id="label-fluency" class="label">Frequency Rate</div>
+        <div class="value"><span id="frequency-rate"></span></div>
+      </div>
+    </div>
+
+    <button id="btn-play-again" class="primary" type="button" onclick="restartGame()">Play Again</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

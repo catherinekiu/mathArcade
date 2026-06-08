@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multiplication Bingo Game • History</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="history">
+  <div class="page">
+    <div class="brand">
+      <h1 class="title" data-i18n="game_history">Game history</h1>
+      <p class="subtitle" data-i18n="every_match">Every match saved on this device</p>
+
+      <div class="lang-switch" aria-label="Language switch">
+        <label for="langSelect" data-i18n="language_label">Language</label>
+        <select id="langSelect">
+          <option value="en-GB">English (UK)</option>
+          <option value="zh-CN">中文 (简体)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="card card-lg" style="width:min(980px,100%);">
+      <div class="filters">
+        <input type="text" id="searchPlayer" data-i18n-placeholder="search_player" placeholder="Search player" oninput="filterHistory()">
+        <select id="tableFilter" data-fill-tables onchange="filterHistory()"></select>
+      </div>
+
+      <table id="historyTable"></table>
+
+      <div class="footer-actions" style="margin-top:16px;">
+        <button class="btn btn-danger" onclick="clearHistory()" data-i18n="clear_history">Clear history</button>
+        <button class="btn btn-ghost" onclick="window.location.href='menu.html'" data-i18n="back_to_menu">Back to menu</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    function headerRow() {
+      const t = window.i18n?.t || ((k) => k);
+      return `<tr>
+        <th>${t('date')}</th>
+        <th>${t('player1')}</th>
+        <th>${t('score')}</th>
+        <th>${t('player2')}</th>
+        <th>${t('score')}</th>
+        <th>${t('times_table')}</th>
+      </tr>`;
+    }
+
+    function formatTimesTable(value) {
+      const t = window.i18n?.t || ((k) => k);
+      const lang = window.i18n?.getLang ? window.i18n.getLang() : 'en-GB';
+      const v = String(value ?? '').trim();
+
+      if (v.startsWith('mixed:')) {
+        const nums = v.replace('mixed:', '').split(',').map(s => parseInt(s,10)).filter(n => !Number.isNaN(n));
+        const joiner = (lang === 'zh-CN') ? '、' : ', ';
+        const tablesStr = nums.map(n => '×' + n).join(joiner);
+        return (lang === 'zh-CN') ? `${t('mixed_tables')}（${tablesStr}）` : `${t('mixed_tables')} (${tablesStr})`;
+      }
+
+      const n = parseInt(v, 10);
+      if (!Number.isNaN(n) && n >= 2 && n <= 9) return t('times_table_n', { n });
+      return t('unknown');
+    }
+
+    function displayHistory() {
+      const history = JSON.parse(localStorage.getItem('scores')) || [];
+      const table = document.getElementById('historyTable');
+      table.innerHTML = headerRow();
+
+      history.forEach(entry => {
+        const row = `<tr>
+          <td>${entry.date}</td>
+          <td>${entry.player1}</td>
+          <td>${entry.score1}</td>
+          <td>${entry.player2}</td>
+          <td>${entry.score2}</td>
+          <td>${formatTimesTable(entry.timesTable)}</td>
+        </tr>`;
+        table.innerHTML += row;
+      });
+    }
+
+    function filterHistory() {
+      const search = document.getElementById('searchPlayer').value.toLowerCase();
+      const filter = document.getElementById('tableFilter').value;
+      const history = JSON.parse(localStorage.getItem('scores')) || [];
+
+      const filtered = history.filter(entry =>
+        (filter === 'all' || (filter === 'mixed' ? String(entry.timesTable).startsWith('mixed:') : String(entry.timesTable) === String(filter))) &&
+        (search === '' || entry.player1.toLowerCase().includes(search) || entry.player2.toLowerCase().includes(search))
+      );
+
+      const table = document.getElementById('historyTable');
+      table.innerHTML = headerRow();
+      filtered.forEach(entry => {
+        const row = `<tr>
+          <td>${entry.date}</td>
+          <td>${entry.player1}</td>
+          <td>${entry.score1}</td>
+          <td>${entry.player2}</td>
+          <td>${entry.score2}</td>
+          <td>${formatTimesTable(entry.timesTable)}</td>
+        </tr>`;
+        table.innerHTML += row;
+      });
+    }
+
+    function clearHistory() {
+      localStorage.removeItem('scores');
+      const t = window.i18n?.t || ((k) => k);
+      alert(t('history_cleared'));
+      displayHistory();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      displayHistory();
+
+      // If language changes, re-render table headers + times-table wording.
+      const langSelect = document.getElementById('langSelect');
+      if (langSelect) {
+        langSelect.addEventListener('change', () => {
+          setTimeout(() => filterHistory(), 0);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

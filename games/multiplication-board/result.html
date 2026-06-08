@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multiplication Bingo Game • Result</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="result">
+  <div class="page">
+    <div class="brand">
+      <h1 class="title" data-i18n="game_over_title">Game Over!</h1>
+      <p class="subtitle" data-i18n="result_subtitle">Let’s see who cooked 🔥</p>
+
+      <div class="lang-switch" aria-label="Language switch">
+        <label for="langSelect" data-i18n="language_label">Language</label>
+        <select id="langSelect">
+          <option value="en-GB">English (UK)</option>
+          <option value="zh-CN">中文 (简体)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="card card-lg" style="width:min(720px,100%);">
+      <div class="scoreboard" style="margin-top:0;">
+        <div class="section">
+          <h2 id="player1Name" style="margin-bottom:6px;"></h2>
+          <div class="question" id="player1Score" style="margin:0; font-size:26px;"></div>
+        </div>
+        <div class="section">
+          <h2 id="player2Name" style="margin-bottom:6px;"></h2>
+          <div class="question" id="player2Score" style="margin:0; font-size:26px;"></div>
+        </div>
+      </div>
+
+      <div class="footer-actions" style="margin-top:16px;">
+        <button class="btn btn-success" onclick="playAgain()" data-i18n="play_again">Play again</button>
+        <button class="btn btn-primary" onclick="viewScoreboard()" data-i18n="scoreboard_btn">Scoreboard</button>
+        <button class="btn btn-warn" onclick="viewHistory()" data-i18n="game_history">Game history</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const t = window.i18n?.t || ((k) => k);
+      const locale = window.i18n?.getLocale ? window.i18n.getLocale() : "en-GB";
+
+      let player1 = localStorage.getItem('player1Name') || t('player1');
+      let player2 = localStorage.getItem('player2Name') || t('player2');
+      let score1 = localStorage.getItem('finalScore1') || 0;
+      let score2 = localStorage.getItem('finalScore2') || 0;
+
+      document.getElementById('player1Name').innerText = player1;
+      document.getElementById('player1Score').innerText = t('score_label', { score: score1 });
+      document.getElementById('player2Name').innerText = player2;
+      document.getElementById('player2Score').innerText = t('score_label', { score: score2 });
+
+      saveGameRecord(player1, score1, player2, score2, locale);
+    });
+
+    function saveGameRecord(player1, score1, player2, score2, locale) {
+      let scores = JSON.parse(localStorage.getItem('scores')) || [];
+
+      // Store selected times tables
+      let tables = [];
+      try {
+        tables = JSON.parse(localStorage.getItem('selectedTables')) || [];
+      } catch (e) {
+        tables = [];
+      }
+      const legacy = localStorage.getItem('selectedTable');
+
+      let timesTableValue;
+      if (Array.isArray(tables) && tables.length > 1) {
+        timesTableValue = 'mixed:' + tables.map(String).join(',');
+      } else if (Array.isArray(tables) && tables.length === 1) {
+        timesTableValue = String(tables[0]);
+      } else if (legacy) {
+        timesTableValue = String(legacy);
+      } else {
+        timesTableValue = (window.i18n?.t ? window.i18n.t('unknown') : 'Unknown');
+      }
+
+      let newRecord = {
+        player1: player1,
+        score1: parseInt(score1, 10),
+        player2: player2,
+        score2: parseInt(score2, 10),
+        timesTable: timesTableValue,
+        date: new Date().toLocaleString(locale)
+      };
+
+      scores.push(newRecord);
+      localStorage.setItem('scores', JSON.stringify(scores));
+    }
+
+    function playAgain() {
+      window.location.href = 'game.html';
+    }
+    function viewScoreboard() {
+      window.location.href = 'scoreboard.html';
+    }
+    function viewHistory() {
+      window.location.href = 'history.html';
+    }
+  </script>
+</body>
+</html>

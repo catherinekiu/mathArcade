@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multiplication Fluency Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="menu">
+    <h1 id="app-title">Catch Me! Game</h1>
+
+    <!-- Language -->
+    <div id="language-selection" class="panel">
+      <h2 id="lang-title">Choose Language</h2>
+      <div class="lang-row">
+        <button class="lang-btn" data-lang="en" aria-pressed="true">English</button>
+        <button class="lang-btn" data-lang="zh" aria-pressed="false">中文（简体）</button>
+      </div>
+      <p id="lang-hint" class="hint">You can change language before starting the game.</p>
+    </div>
+
+    <div id="rules">
+      <h2 id="rules-title">Game Rules:</h2>
+      <p id="rule-1">1️⃣ Select a times table from the options below.</p>
+      <p id="rule-2">2️⃣ Move the basket left and right using <strong>Arrow Keys</strong> or touch controls.</p>
+      <p id="rule-3">3️⃣ Press <strong>Down Arrow</strong> or touch the "Speed Up" button to drop answers faster.</p>
+      <p id="rule-4">4️⃣ Catch the correct answer inside the basket to score points.</p>
+      <p id="rule-5">5️⃣ After <strong>10 attempts</strong>, you can click <strong>"End Game"</strong> to view results.</p>
+      <p id="rule-6">6️⃣ The results screen will show your <strong>fluency rate, accuracy, and speed.</strong></p>
+    </div>
+
+    <h2 id="choose-table-title">Choose Your Times Table</h2>
+ <div id="board-selection">
+  <button class="board-btn" data-table="2" aria-pressed="false">x2</button>
+  <button class="board-btn" data-table="3" aria-pressed="false">x3</button>
+  <button class="board-btn" data-table="4" aria-pressed="false">x4</button>
+  <button class="board-btn" data-table="5" aria-pressed="false">x5</button>
+  <button class="board-btn" data-table="6" aria-pressed="false">x6</button>
+  <button class="board-btn" data-table="7" aria-pressed="false">x7</button>
+  <button class="board-btn" data-table="8" aria-pressed="false">x8</button>
+  <button class="board-btn" data-table="9" aria-pressed="false">x9</button>
+  <button class="board-btn mixed-btn" data-table="mixed" id="mixed-btn" aria-pressed="false">🎲 Mixed x3</button>
+</div>
+
+
+    <div id="mixed-panel" aria-hidden="true">
+      <p class="mixed-hint" id="mixed-hint"><strong>Mixed Mode:</strong> Choose exactly <strong>3</strong> times tables.</p>
+      <div id="mixed-checkboxes" class="mixed-checkboxes">
+        <label><input type="checkbox" value="2"> x2</label>
+        <label><input type="checkbox" value="3"> x3</label>
+        <label><input type="checkbox" value="4"> x4</label>
+        <label><input type="checkbox" value="5"> x5</label>
+        <label><input type="checkbox" value="6"> x6</label>
+        <label><input type="checkbox" value="7"> x7</label>
+        <label><input type="checkbox" value="8"> x8</label>
+        <label><input type="checkbox" value="9"> x9</label>
+      </div>
+      <p class="mixed-count" id="mixed-count-line">Selected: <span id="mixed-count">0</span>/3</p>
+    </div>
+    <h2 id="timing-title">Choose Play Mode</h2>
+      <div id="timing-selection">
+        <button class="timing-btn" data-timing="untimed" id="timing-untimed" aria-pressed="true">⌛ Untimed</button>
+        <button class="timing-btn" data-timing="timed" id="timing-timed" aria-pressed="false">⏱ Timed (1 min)</button>
+      </div>
+      <p id="timing-hint" class="hint">Timed mode lasts 1 minute. Untimed mode can be ended after 10 attempts.</p>
+
+
+      <h2 id="mode-title">Choose Your Game Mode</h2>
+      <div id="mode-selection">
+        <button class="mode-btn" data-mode="slow" id="mode-slow">🐢 Slow</button>
+        <button class="mode-btn" data-mode="moderate" id="mode-moderate">🐇 Moderate</button>
+        <button class="mode-btn" data-mode="fast" id="mode-fast">🚀 Fast</button>
+      </div>
+
+  </div>
+
+  <div id="game-container" style="display: none;">
+    <button id="endGame">End Game</button>
+    <h2 id="question"></h2>
+    <canvas id="gameCanvas"></canvas>
+
+    <div id="hud">
+      <div class="hud-chip"><span id="lbl-time" class="hud-label">Time</span>: <span id="time" class="hud-number">0</span> <span id="lbl-sec" class="hud-unit">sec</span></div>
+      <div class="hud-chip"><span id="lbl-attempts" class="hud-label">Attempts</span>: <span id="attempts" class="hud-number">0</span></div>
+      <div class="hud-chip"><span id="lbl-correct" class="hud-label">Correct</span>: <span id="correct" class="hud-number">0</span></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

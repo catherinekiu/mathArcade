@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chair Arrangement Game</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="game-container">
+    <header class="header">
+      <div class="title-wrap">
+        <h1 data-i18n="title">Chair Arrangement Game 🪑✨</h1>
+        <p class="subtitle" data-i18n="subtitle">Build arrays with chairs. Learn rows × columns the fun way!</p>
+      </div>
+
+      <div class="header-right">
+        <div class="hud" aria-label="Game progress" data-i18n-aria="hudAria">
+          <div class="hud-pill" data-i18n-title="starsTitle" title="Stars earned">
+            ⭐ <span data-i18n="starsLabel">Stars</span>: <span id="starsCount">0</span>
+          </div>
+          <div class="hud-pill" data-i18n-title="streakTitle" title="Your streak of correct answers">
+            🔥 <span data-i18n="streakLabel">Streak</span>: <span id="streakCount">0</span>
+          </div>
+        </div>
+
+        <div class="lang-switch" aria-label="Language">
+          <label class="sr-only" for="langSelect" data-i18n="languageLabel">Language</label>
+          <select id="langSelect">
+            <option value="en-GB">English (UK)</option>
+            <option value="zh-CN">简体中文</option>
+          </select>
+        </div>
+      </div>
+    </header>
+
+    <div class="controls">
+      <label class="field-label" for="mode" data-i18n="modeLabel">Mode</label>
+      <select id="mode" onchange="switchMode()">
+        <option value="learning" data-i18n="learningModeOption">Learning Mode</option>
+        <option value="practice" data-i18n="practiceModeOption">Practice Mode</option>
+      </select>
+    </div>
+
+    <!-- Learning Mode -->
+    <section id="learningMode" class="panel">
+      <h2 data-i18n="learningModeHeading">Learning Mode</h2>
+      <p class="help-text" data-i18n="learningHelp">Pick rows and columns, then generate the chair array.</p>
+
+      <div class="row">
+        <div class="field">
+          <label class="field-label" for="rows" data-i18n="rowsLabel">Rows</label>
+          <input type="number" id="rows" min="1" max="10" value="3" />
+        </div>
+        <div class="field">
+          <label class="field-label" for="columns" data-i18n="columnsLabel">Columns</label>
+          <input type="number" id="columns" min="1" max="10" value="4" />
+        </div>
+        <button class="btn btn-primary" onclick="generateLearningMode()" data-i18n="generateBtn">Generate</button>
+      </div>
+
+      <div id="multiplicationStatementLearning" class="statement"></div>
+      <div id="arrayGridLearning" class="grid"></div>
+    </section>
+
+    <!-- Practice Mode -->
+    <section id="practiceMode" class="panel" style="display: none;">
+      <h2 data-i18n="practiceModeHeading">Practice Mode</h2>
+      <p id="mascotBubble" class="bubble" data-i18n="practiceBubble">Hi! Press <b>Start</b> and build the array.</p>
+
+      <div class="row wrap">
+        <div class="field">
+          <label class="field-label" for="timesTableSelect" data-i18n="timesTableLabel">Times Table</label>
+          <select id="timesTableSelect" aria-label="Times table">
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+          </select>
+        </div>
+        <button id="generateChairs" class="btn btn-primary" data-i18n="startBtn">Start</button>
+        <button id="resetButton" class="btn btn-ghost" data-i18n="newQuestionBtn">New Question</button>
+        <button id="generateEquation" class="btn btn-success" data-i18n="checkBtn">Check</button>
+        <button id="revealAnswer" class="btn btn-warning" style="display:none;" data-i18n="showAnswerBtn">Show Answer</button>
+      </div>
+
+      <div id="feedbackMessage" class="feedback-message" role="status" aria-live="polite"></div>
+      <div id="multiplicationStatementPractice" class="statement"></div>
+
+      <div class="practice-layout">
+        <div>
+          <h3 class="mini-title" data-i18n="yourGridTitle">Your Classroom Grid</h3>
+          <div id="arrayGridPractice" class="grid grid-practice"></div>
+          <p class="hint" data-i18n="gridHint">Tip: make a tidy rectangle. No floating chairs!</p>
+        </div>
+
+        <div>
+          <h3 class="mini-title" data-i18n="trayTitle">Chair Tray (drag from here)</h3>
+          <div id="dragArea" class="drag-area" aria-label="Drag chairs from here" data-i18n-aria="trayAria"></div>
+          <p class="hint" data-i18n="trayHint">You can drag chairs back here too.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span data-i18n="footerText">Made for young learners • Drag, build, and learn ✨</span>
+    </footer>
+  </div>
+
+  <div id="confettiLayer" class="confetti-layer" aria-hidden="true"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
