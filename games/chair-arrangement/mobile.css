@@ -1,0 +1,156 @@
+/* Chair Arrangement — Android landscape + touch placement */
+@media (pointer:coarse), (max-width:900px){
+  body.mmq-playing{
+    margin:0;
+    padding:0;
+    width:var(--mmq-vw);
+    height:var(--mmq-vh);
+    overflow:hidden;
+    align-items:stretch;
+    justify-content:stretch;
+    --chair-cell:clamp(22px,6.2vh,34px);
+    --chair-gap:2px;
+  }
+
+  body.mmq-playing .game-container{
+    width:100%;
+    height:100%;
+    max-height:none;
+    margin:0;
+    padding:5px 7px;
+    overflow:hidden;
+    border-radius:0;
+    border:0;
+    display:grid;
+    grid-template-rows:auto auto minmax(0,1fr);
+    gap:3px;
+  }
+
+  body.mmq-playing .header{
+    margin:0;
+    gap:5px;
+    flex-wrap:nowrap;
+    align-items:center;
+  }
+  body.mmq-playing h1{ font-size:16px; white-space:nowrap; }
+  body.mmq-playing .subtitle{ display:none; }
+  body.mmq-playing .header-right{ gap:4px; flex-wrap:nowrap; }
+  body.mmq-playing .hud{ gap:4px; }
+  body.mmq-playing .hud-pill{ min-height:34px; padding:4px 7px; font-size:11px; box-shadow:none; }
+  body.mmq-playing .lang-switch select{ min-height:34px; padding:3px 7px; font-size:11px; }
+
+  body.mmq-playing .controls{
+    margin:0;
+    gap:5px;
+  }
+  body.mmq-playing .controls .field-label{ font-size:11px; }
+  body.mmq-playing .controls select{ min-height:34px; padding:3px 7px; font-size:12px; }
+
+  body.mmq-playing .panel{
+    min-height:0;
+    margin:0;
+    padding:5px;
+    border-radius:12px;
+    overflow:hidden;
+  }
+  body.mmq-playing .panel h2{ display:none; }
+  body.mmq-playing .help-text{ display:none; }
+  body.mmq-playing .row{ gap:4px; }
+  body.mmq-playing .field{ gap:2px; }
+  body.mmq-playing .field-label{ font-size:11px; }
+  body.mmq-playing select,
+  body.mmq-playing input[type="number"]{ min-height:34px; padding:3px 6px; font-size:12px; border-radius:9px; }
+  body.mmq-playing input[type="number"]{ width:58px; }
+  body.mmq-playing .btn{ min-height:34px; padding:4px 8px; font-size:11px; border-radius:10px; box-shadow:none; }
+  body.mmq-playing .statement{ margin:3px 0; font-size:12px; line-height:1.15; }
+  body.mmq-playing .bubble{ margin:0 0 3px; padding:4px 6px; font-size:11px; border-radius:10px; }
+  body.mmq-playing .feedback-message{ margin:2px 0; padding:4px 6px; font-size:11px; }
+
+  body.mmq-playing #practiceMode{
+    display:grid;
+    grid-template-rows:auto auto auto minmax(0,1fr);
+  }
+  body.mmq-playing .practice-layout{
+    min-height:0;
+    display:grid;
+    grid-template-columns:minmax(230px,1.25fr) minmax(150px,.75fr);
+    gap:5px;
+    align-items:stretch;
+    overflow:hidden;
+  }
+  body.mmq-playing .practice-layout > div{ min-height:0; overflow:hidden; }
+  body.mmq-playing .mini-title{ margin:1px 0 3px; font-size:11px; }
+  body.mmq-playing .hint{ display:none; }
+
+  body.mmq-playing .grid{
+    gap:var(--chair-gap);
+    padding:3px;
+    max-height:100%;
+    overflow:hidden;
+    border-radius:10px;
+    box-shadow:none;
+    align-content:center;
+  }
+  body.mmq-playing .grid-practice{
+    grid-template-columns:repeat(10,var(--chair-cell)) !important;
+    grid-template-rows:repeat(10,var(--chair-cell)) !important;
+  }
+  body.mmq-playing .grid-cell{
+    width:var(--chair-cell);
+    height:var(--chair-cell);
+    border-radius:5px;
+    border-width:1px;
+  }
+  body.mmq-playing .chair{
+    width:calc(var(--chair-cell) - 2px);
+    height:calc(var(--chair-cell) - 2px);
+    border-radius:4px;
+    filter:none;
+  }
+  body.mmq-playing .drag-area{
+    min-height:0;
+    height:100%;
+    padding:4px;
+    gap:3px;
+    overflow:auto;
+    align-content:flex-start;
+    border-radius:10px;
+    box-shadow:none;
+  }
+  body.mmq-playing .drag-area .chair{ flex:0 0 auto; }
+  body.mmq-playing .chair.touch-selected{
+    outline:3px solid #ff9f1a;
+    outline-offset:1px;
+    transform:scale(1.08);
+  }
+  body.mmq-playing .grid-cell.touch-target{
+    background:rgba(43,124,255,.2);
+    border-color:#2b7cff;
+  }
+  body.mmq-playing .footer{ display:none; }
+
+  body.mmq-playing #learningMode{
+    display:grid;
+    grid-template-rows:auto auto minmax(0,1fr);
+  }
+  body.mmq-playing #arrayGridLearning{
+    align-self:center;
+    justify-self:center;
+    grid-auto-columns:var(--chair-cell) !important;
+    grid-auto-rows:var(--chair-cell) !important;
+  }
+  body.mmq-playing #arrayGridLearning .chair{
+    width:var(--chair-cell);
+    height:var(--chair-cell);
+  }
+}
+
+@media (max-height:390px) and (orientation:landscape){
+  body.mmq-playing{ --chair-cell:clamp(20px,5.7vh,28px); }
+  body.mmq-playing .game-container{ padding:3px 5px; }
+  body.mmq-playing h1{ font-size:14px; }
+  body.mmq-playing .hud-pill,
+  body.mmq-playing .lang-switch select,
+  body.mmq-playing .controls select,
+  body.mmq-playing .btn{ min-height:30px; }
+}

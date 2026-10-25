@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Multiplication Array Model</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="../../shared/mmq-mobile.css">
+  <link rel="stylesheet" href="mobile.css">
 </head>
 <body>
   <header class="topbar">
@@ -15,92 +17,55 @@
         <p class="subtitle" data-i18n="subtitle">Build arrays, tap squares, and learn what rows × columns really means.</p>
       </div>
     </div>
-
     <div class="controls">
       <button id="langEnBtn" class="chip" type="button" aria-label="English" data-lang="en">🇬🇧 English (UK)</button>
       <button id="langZhBtn" class="chip" type="button" aria-label="简体中文" data-lang="zh">🇨🇳 简体中文</button>
     </div>
   </header>
 
-  <!-- LEARNING SCREEN -->
   <main id="learningScreen" class="container centered">
     <section class="card">
       <h2 class="card-title" data-i18n="learnTitle">Learn</h2>
-
       <div class="learn-layout">
         <div class="learn-panel">
           <div class="input-group">
-            <div class="input-pair">
-              <label for="factor1" data-i18n="selectRows">Select rows</label>
-              <input type="number" id="factor1" min="1" max="10" value="2">
-            </div>
-
-            <div class="input-pair">
-              <label for="factor2" data-i18n="selectCols">Select columns</label>
-              <input type="number" id="factor2" min="1" max="10" value="3">
-            </div>
+            <div class="input-pair"><label for="factor1" data-i18n="selectRows">Select rows</label><input type="number" id="factor1" min="1" max="10" value="2"></div>
+            <div class="input-pair"><label for="factor2" data-i18n="selectCols">Select columns</label><input type="number" id="factor2" min="1" max="10" value="3"></div>
           </div>
-
           <div class="button-group">
-            <button class="btn primary" id="btnGenerate" type="button" onclick="generateArray()">
-              <span aria-hidden="true">✨</span> <span data-i18n="generate">Generate array</span>
-            </button>
-<button class="btn ghost" id="btnPractice" type="button" onclick="switchToPractice()">
-              <span aria-hidden="true">🎯</span> <span data-i18n="practiseMode">Practise mode</span>
-            </button>
+            <button class="btn primary" id="btnGenerate" type="button" onclick="generateArray()"><span aria-hidden="true">✨</span> <span data-i18n="generate">Generate array</span></button>
+            <button class="btn ghost" id="btnPractice" type="button" onclick="switchToPractice()"><span aria-hidden="true">🎯</span> <span data-i18n="practiseMode">Practise mode</span></button>
           </div>
-
           <p id="conceptNote" class="concept-note" aria-live="polite"></p>
           <div id="multiplicationEquation" class="equation" aria-live="polite"></div>
           <div id="repeatedAddition" class="equation small repeated" aria-live="polite"></div>
           <div id="selectedCount" class="equation small" aria-live="polite" data-i18n-dynamic="selectedCount">Selected count: 0</div>
           <p class="hint" data-i18n="tapHint">Tip: Tap squares to count. You can tap again to unselect.</p>
         </div>
-
-        <div id="arrayContainer" class="centered learn-grid-area">
-          <div id="arrayModel" class="grid-container" aria-label="Array model grid"></div>
-        </div>
+        <div id="arrayContainer" class="centered learn-grid-area"><div id="arrayModel" class="grid-container" aria-label="Array model grid"></div></div>
       </div>
     </section>
   </main>
 
-  <!-- PRACTISE SCREEN -->
   <main id="practiceScreen" class="container centered hidden">
     <section class="card">
       <div class="practice-header">
         <h2 class="card-title" data-i18n="practiceTitle">Practise</h2>
-
         <div class="practice-table-pick" aria-label="Times table selector">
           <label for="tableSelect" class="table-label" data-i18n="practiceTableLabel">Times table</label>
           <select id="tableSelect" class="table-select" aria-label="Times table">
-            <option value="any" data-i18n="practiceAnyTable">Any</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
+            <option value="any" data-i18n="practiceAnyTable">Any</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option>
           </select>
         </div>
-
         <div id="scoreboard" class="scoreboard" aria-live="polite">Score: 0/0</div>
-        <button class="btn ghost smallbtn" type="button" onclick="switchToLearning()">
-          <span aria-hidden="true">⬅️</span> <span data-i18n="backToLearn">Back to Learn</span>
-        </button>
+        <button class="btn ghost smallbtn" type="button" onclick="switchToLearning()"><span aria-hidden="true">⬅️</span> <span data-i18n="backToLearn">Back to Learn</span></button>
       </div>
-
       <div class="practice-layout">
         <div class="practice-left">
           <h3 id="question" class="question" aria-live="polite"></h3>
           <p id="questionHint" class="concept-note" aria-live="polite"></p>
-          <div id="practiceArrayContainer" class="centered">
-            <div id="practiceArrayModel" class="grid-container" aria-label="Practice array grid"></div>
-          </div>
+          <div id="practiceArrayContainer" class="centered"><div id="practiceArrayModel" class="grid-container" aria-label="Practice array grid"></div></div>
         </div>
-
         <div class="practice-right">
           <div class="equation-area">
             <p class="hint" data-i18n="chooseEquation">Choose the correct equation:</p>
@@ -108,21 +73,16 @@
             <div id="practiceRepresentation" class="equation small repeated hidden" aria-live="polite"></div>
             <div id="practiceOptions" class="options-grid" role="group" aria-label="Answer options"></div>
           </div>
-
           <div id="feedback" class="feedback" aria-live="polite"></div>
-
-          <div class="button-group practice-actions">
-            <button class="btn secondary" type="button" onclick="newPracticeQuestion()">
-              <span aria-hidden="true">🎲</span> <span data-i18n="newQuestion">New question</span>
-            </button>
-          </div>
+          <div class="button-group practice-actions"><button class="btn secondary" type="button" onclick="newPracticeQuestion()"><span aria-hidden="true">🎲</span> <span data-i18n="newQuestion">New question</span></button></div>
         </div>
       </div>
     </section>
   </main>
 
   <div id="confettiLayer" aria-hidden="true"></div>
-
+  <script src="../../shared/mmq-mobile.js"></script>
   <script src="script.js"></script>
+  <script src="mobile.js"></script>
 </body>
 </html>

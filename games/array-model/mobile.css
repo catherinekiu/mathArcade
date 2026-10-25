@@ -1,0 +1,101 @@
+/* Array Model — Android landscape one-screen layout */
+@media (pointer:coarse), (max-width:900px){
+  body.mmq-playing{
+    width:var(--mmq-vw);
+    height:var(--mmq-vh);
+    min-height:0;
+    overflow:hidden;
+    padding:0;
+  }
+
+  body.mmq-playing .topbar{
+    width:100%;
+    margin:0;
+    padding:4px 8px;
+    border-radius:0;
+    box-shadow:none;
+    gap:8px;
+    min-height:42px;
+  }
+  body.mmq-playing .logo{ width:36px; height:36px; border-radius:12px; font-size:20px; }
+  body.mmq-playing .brand{ gap:7px; min-width:0; }
+  body.mmq-playing .brand-text h1{ font-size:16px; white-space:nowrap; }
+  body.mmq-playing .subtitle{ display:none; }
+  body.mmq-playing .controls{ gap:4px; flex-wrap:nowrap; }
+  body.mmq-playing .chip{ min-height:34px; padding:5px 8px; font-size:12px; }
+
+  body.mmq-playing .container{
+    width:100%;
+    min-height:0;
+    padding:4px 6px 6px;
+  }
+  body.mmq-playing .card{
+    border-radius:14px;
+    padding:7px;
+    box-shadow:none;
+    min-height:0;
+  }
+  body.mmq-playing .card-title{ display:none; }
+
+  body.mmq-playing .learn-layout{
+    grid-template-columns:minmax(210px,.72fr) minmax(0,1.28fr);
+    gap:6px;
+  }
+  body.mmq-playing .learn-panel{ align-items:stretch; min-height:0; overflow:hidden; }
+  body.mmq-playing .input-group{
+    margin:0;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:5px;
+  }
+  body.mmq-playing .input-pair{ gap:4px; min-width:0; }
+  body.mmq-playing .input-pair label{ font-size:12px; }
+  body.mmq-playing .input-pair input{
+    width:54px;
+    min-height:36px;
+    padding:4px;
+    font-size:18px;
+    border-radius:10px;
+  }
+  body.mmq-playing .button-group{ margin:4px 0; gap:4px; flex-wrap:nowrap; }
+  body.mmq-playing .btn{ min-height:38px; padding:5px 7px; font-size:12px; border-radius:11px; gap:4px; }
+  body.mmq-playing .concept-note{ margin:3px 0; padding:5px 6px; border-radius:10px; font-size:12px; }
+  body.mmq-playing .equation{ margin-top:2px; font-size:16px; line-height:1.12; }
+  body.mmq-playing .equation.small{ font-size:12px; }
+  body.mmq-playing .hint{ margin:3px 0 0; font-size:11px; line-height:1.2; }
+  body.mmq-playing #arrayContainer,
+  body.mmq-playing #practiceArrayContainer{ margin-top:0; min-height:0; overflow:hidden; }
+
+  body.mmq-playing .practice-header{
+    margin:0 0 4px;
+    gap:4px;
+    flex-wrap:nowrap;
+  }
+  body.mmq-playing .practice-table-pick{ padding:3px 6px; gap:4px; }
+  body.mmq-playing .table-label{ font-size:11px; }
+  body.mmq-playing .table-select{ min-height:34px; padding:4px 26px 4px 8px; font-size:12px; }
+  body.mmq-playing .scoreboard{ font-size:12px; font-weight:900; white-space:nowrap; }
+  body.mmq-playing .smallbtn{ min-height:34px; padding:4px 7px; font-size:11px; }
+
+  body.mmq-playing .practice-layout{
+    grid-template-columns:minmax(0,1.25fr) minmax(220px,.75fr);
+    gap:6px;
+  }
+  body.mmq-playing .question{ margin:0 0 2px; font-size:16px; }
+  body.mmq-playing #questionHint{ display:none; }
+  body.mmq-playing .practice-right{ overflow:hidden; }
+  body.mmq-playing .practice-right .hint{ margin:0 0 2px; }
+  body.mmq-playing .options-grid{ gap:5px; }
+  body.mmq-playing .feedback{ min-height:20px; margin-top:2px; font-size:12px; }
+  body.mmq-playing .practice-actions{ margin:3px 0 0; }
+  body.mmq-playing .corner-sticker{ padding:3px 5px; font-size:11px; }
+}
+
+@media (max-height:390px) and (orientation:landscape){
+  body.mmq-playing .topbar{ min-height:36px; padding:2px 6px; }
+  body.mmq-playing .logo{ width:30px; height:30px; font-size:17px; }
+  body.mmq-playing .brand-text h1{ font-size:14px; }
+  body.mmq-playing .chip{ min-height:30px; padding:3px 6px; }
+  body.mmq-playing .container{ padding:2px 4px 4px; }
+  body.mmq-playing .card{ padding:5px; }
+}

@@ -2,70 +2,44 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Multiplication Bingo Game • Game</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../../shared/mmq-mobile.css">
+  <link rel="stylesheet" href="mobile.css">
 </head>
 <body data-page="game">
   <div class="page">
     <div class="brand">
       <h1 class="title" data-i18n="app_title">Multiplication Bingo Game</h1>
       <p class="subtitle" data-i18n="game_subtitle">Competition Mode</p>
-
       <div class="lang-switch" aria-label="Language switch">
         <label for="langSelect" data-i18n="language_label">Language</label>
-        <select id="langSelect">
-          <option value="en-GB">English (UK)</option>
-          <option value="zh-CN">中文 (简体)</option>
-        </select>
+        <select id="langSelect"><option value="en-GB">English (UK)</option><option value="zh-CN">中文 (简体)</option></select>
       </div>
     </div>
 
     <div class="card card-lg game-container">
-      <div class="game-header">
-        <div id="question" class="question" data-i18n="question_default">Question</div>
-      </div>
+      <div class="game-header"><div id="question" class="question" data-i18n="question_default">Question</div></div>
 
       <div class="scoreboard">
         <div class="player-info">
           <div class="score-label" data-i18n="player1_score_label">Player 1 score</div>
-          <div class="player-box blue">
-            <span data-i18n="player1">Player 1</span>
-            <input type="text" id="player1-name" data-i18n-placeholder="type_your_name" placeholder="Type your name" readonly>
-          </div>
+          <div class="player-box blue"><span data-i18n="player1">Player 1</span><input type="text" id="player1-name" data-i18n-placeholder="type_your_name" placeholder="Type your name" readonly></div>
         </div>
-
         <div class="player-info">
           <div class="score-label" data-i18n="player2_score_label">Player 2 score</div>
-          <div class="player-box green">
-            <span data-i18n="player2">Player 2</span>
-            <input type="text" id="player2-name" data-i18n-placeholder="type_your_name" placeholder="Type your name" readonly>
-          </div>
+          <div class="player-box green"><span data-i18n="player2">Player 2</span><input type="text" id="player2-name" data-i18n-placeholder="type_your_name" placeholder="Type your name" readonly></div>
         </div>
       </div>
 
       <div class="boards">
-        <div class="board-container">
-          <div class="board-title" data-i18n="player1_board">Player 1 board</div>
-          <div class="board" id="board1"></div>
-        </div>
-
-        <div class="timer-container">
-          <p class="timer-text" data-i18n="timer">Timer</p>
-          <div class="timer-chip">
-            <p id="timer">15</p>
-          </div>
-          <p class="timer-subtext" data-i18n="seconds_per_question">15 seconds per question</p>
-        </div>
-
-        <div class="board-container">
-          <div class="board-title" data-i18n="player2_board">Player 2 board</div>
-          <div class="board" id="board2"></div>
-        </div>
+        <div class="board-container"><div class="board-title" data-i18n="player1_board">Player 1 board</div><div class="board" id="board1"></div></div>
+        <div class="timer-container"><p class="timer-text" data-i18n="timer">Timer</p><div class="timer-chip"><p id="timer">15</p></div><p class="timer-subtext" data-i18n="seconds_per_question">15 seconds per question</p></div>
+        <div class="board-container"><div class="board-title" data-i18n="player2_board">Player 2 board</div><div class="board" id="board2"></div></div>
       </div>
 
       <div id="turnMessage" class="turn-message">...</div>
-
       <div class="footer-actions">
         <button class="btn btn-success" id="playStartBtn" onclick="startPlay()" data-i18n="start_game_btn">Start game</button>
         <button class="btn btn-ghost" onclick="window.location.href='menu.html'" data-i18n="back_to_menu">Back to menu</button>
@@ -73,6 +47,8 @@
     </div>
   </div>
 
+  <script src="../../shared/mmq-mobile.js"></script>
   <script src="script.js"></script>
+  <script src="mobile.js"></script>
 </body>
 </html>
