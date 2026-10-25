@@ -1,0 +1,76 @@
+/* MMQ! shared Android/mobile layer */
+:root{
+  --mmq-vw:100vw;
+  --mmq-vh:100dvh;
+  --mmq-safe-top:env(safe-area-inset-top,0px);
+  --mmq-safe-right:env(safe-area-inset-right,0px);
+  --mmq-safe-bottom:env(safe-area-inset-bottom,0px);
+  --mmq-safe-left:env(safe-area-inset-left,0px);
+}
+
+html{ -webkit-text-size-adjust:100%; }
+html.mmq-touch{ -webkit-tap-highlight-color:transparent; }
+html.mmq-touch button,
+html.mmq-touch [role="button"],
+html.mmq-touch select,
+html.mmq-touch input{ touch-action:manipulation; }
+
+body.mmq-playing{
+  width:var(--mmq-vw);
+  height:var(--mmq-vh);
+  min-height:0 !important;
+  overflow:hidden !important;
+  overscroll-behavior:none;
+}
+
+.mmq-rotate-overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:2147483000;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  background:linear-gradient(160deg,#e9f7ff,#fff8dd);
+  color:#172033;
+  text-align:center;
+}
+.mmq-rotate-card{
+  width:min(420px,92vw);
+  padding:26px 22px;
+  border-radius:24px;
+  background:rgba(255,255,255,.96);
+  border:2px solid rgba(23,32,51,.12);
+  box-shadow:0 18px 50px rgba(0,0,0,.18);
+}
+.mmq-rotate-icon{ font-size:52px; line-height:1; margin-bottom:10px; }
+.mmq-rotate-title{ font-size:24px; font-weight:900; margin:0 0 8px; }
+.mmq-rotate-text{ font-size:16px; line-height:1.45; margin:0; }
+
+html.mmq-phone.mmq-portrait body.mmq-playing[data-mmq-orientation="landscape"] .mmq-rotate-overlay{
+  display:flex;
+}
+
+@media (pointer:coarse){
+  button,
+  [role="button"],
+  select,
+  input[type="button"],
+  input[type="submit"]{
+    min-height:44px;
+  }
+
+  button:hover,
+  [role="button"]:hover{
+    transform:none;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    scroll-behavior:auto !important;
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+  }
+}
