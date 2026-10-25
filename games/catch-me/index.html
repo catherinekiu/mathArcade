@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Multiplication Fluency Game</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../../shared/mmq-mobile.css">
+  <link rel="stylesheet" href="mobile.css">
 </head>
 <body>
   <div id="menu">
     <h1 id="app-title">Catch Me! Game</h1>
 
-    <!-- Language -->
     <div id="language-selection" class="panel">
       <h2 id="lang-title">Choose Language</h2>
       <div class="lang-row">
@@ -31,18 +32,17 @@
     </div>
 
     <h2 id="choose-table-title">Choose Your Times Table</h2>
- <div id="board-selection">
-  <button class="board-btn" data-table="2" aria-pressed="false">x2</button>
-  <button class="board-btn" data-table="3" aria-pressed="false">x3</button>
-  <button class="board-btn" data-table="4" aria-pressed="false">x4</button>
-  <button class="board-btn" data-table="5" aria-pressed="false">x5</button>
-  <button class="board-btn" data-table="6" aria-pressed="false">x6</button>
-  <button class="board-btn" data-table="7" aria-pressed="false">x7</button>
-  <button class="board-btn" data-table="8" aria-pressed="false">x8</button>
-  <button class="board-btn" data-table="9" aria-pressed="false">x9</button>
-  <button class="board-btn mixed-btn" data-table="mixed" id="mixed-btn" aria-pressed="false">🎲 Mixed x3</button>
-</div>
-
+    <div id="board-selection">
+      <button class="board-btn" data-table="2" aria-pressed="false">x2</button>
+      <button class="board-btn" data-table="3" aria-pressed="false">x3</button>
+      <button class="board-btn" data-table="4" aria-pressed="false">x4</button>
+      <button class="board-btn" data-table="5" aria-pressed="false">x5</button>
+      <button class="board-btn" data-table="6" aria-pressed="false">x6</button>
+      <button class="board-btn" data-table="7" aria-pressed="false">x7</button>
+      <button class="board-btn" data-table="8" aria-pressed="false">x8</button>
+      <button class="board-btn" data-table="9" aria-pressed="false">x9</button>
+      <button class="board-btn mixed-btn" data-table="mixed" id="mixed-btn" aria-pressed="false">🎲 Mixed x3</button>
+    </div>
 
     <div id="mixed-panel" aria-hidden="true">
       <p class="mixed-hint" id="mixed-hint"><strong>Mixed Mode:</strong> Choose exactly <strong>3</strong> times tables.</p>
@@ -58,24 +58,23 @@
       </div>
       <p class="mixed-count" id="mixed-count-line">Selected: <span id="mixed-count">0</span>/3</p>
     </div>
+
     <h2 id="timing-title">Choose Play Mode</h2>
-      <div id="timing-selection">
-        <button class="timing-btn" data-timing="untimed" id="timing-untimed" aria-pressed="true">⌛ Untimed</button>
-        <button class="timing-btn" data-timing="timed" id="timing-timed" aria-pressed="false">⏱ Timed (1 min)</button>
-      </div>
-      <p id="timing-hint" class="hint">Timed mode lasts 1 minute. Untimed mode can be ended after 10 attempts.</p>
+    <div id="timing-selection">
+      <button class="timing-btn" data-timing="untimed" id="timing-untimed" aria-pressed="true">⌛ Untimed</button>
+      <button class="timing-btn" data-timing="timed" id="timing-timed" aria-pressed="false">⏱ Timed (1 min)</button>
+    </div>
+    <p id="timing-hint" class="hint">Timed mode lasts 1 minute. Untimed mode can be ended after 10 attempts.</p>
 
-
-      <h2 id="mode-title">Choose Your Game Mode</h2>
-      <div id="mode-selection">
-        <button class="mode-btn" data-mode="slow" id="mode-slow">🐢 Slow</button>
-        <button class="mode-btn" data-mode="moderate" id="mode-moderate">🐇 Moderate</button>
-        <button class="mode-btn" data-mode="fast" id="mode-fast">🚀 Fast</button>
-      </div>
-
+    <h2 id="mode-title">Choose Your Game Mode</h2>
+    <div id="mode-selection">
+      <button class="mode-btn" data-mode="slow" id="mode-slow">🐢 Slow</button>
+      <button class="mode-btn" data-mode="moderate" id="mode-moderate">🐇 Moderate</button>
+      <button class="mode-btn" data-mode="fast" id="mode-fast">🚀 Fast</button>
+    </div>
   </div>
 
-  <div id="game-container" style="display: none;">
+  <div id="game-container" style="display:none;">
     <button id="endGame">End Game</button>
     <h2 id="question"></h2>
     <canvas id="gameCanvas"></canvas>
@@ -85,8 +84,16 @@
       <div class="hud-chip"><span id="lbl-attempts" class="hud-label">Attempts</span>: <span id="attempts" class="hud-number">0</span></div>
       <div class="hud-chip"><span id="lbl-correct" class="hud-label">Correct</span>: <span id="correct" class="hud-number">0</span></div>
     </div>
+
+    <div class="mobile-game-controls" aria-label="Touch controls">
+      <button id="touch-left" type="button" aria-label="Move basket left">◀</button>
+      <button id="touch-fast" class="drop-fast" type="button" aria-label="Drop apples faster">⬇ Faster</button>
+      <button id="touch-right" type="button" aria-label="Move basket right">▶</button>
+    </div>
   </div>
 
+  <script src="../../shared/mmq-mobile.js"></script>
   <script src="script.js"></script>
+  <script src="mobile.js"></script>
 </body>
 </html>
