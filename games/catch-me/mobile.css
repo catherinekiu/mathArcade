@@ -19,7 +19,7 @@
 
   body.mmq-playing #question{
     margin:0 auto 4px;
-    padding:3px 108px 3px 8px;
+    padding:3px 8px;
     min-height:38px;
     font-size:clamp(22px,5.4vh,32px);
     line-height:1.05;
@@ -38,8 +38,8 @@
   }
 
   body.mmq-playing #hud{
-    top:6px;
-    right:8px;
+    top:46px;
+    right:10px;
     gap:4px;
     flex-wrap:nowrap;
   }
@@ -53,9 +53,9 @@
   }
 
   body.mmq-playing #endGame{
-    top:6px;
+    top:46px;
     bottom:auto;
-    left:8px;
+    left:10px;
     right:auto;
     min-height:34px;
     padding:5px 9px;
@@ -63,9 +63,7 @@
     border-radius:10px;
   }
 
-  .mobile-game-controls{
-    display:none;
-  }
+  .mobile-game-controls{ display:none; }
 
   body.mmq-playing .mobile-game-controls{
     position:absolute;
@@ -107,6 +105,8 @@
 
 @media (max-height:390px) and (orientation:landscape){
   body.mmq-playing #question{ min-height:32px; font-size:20px; }
+  body.mmq-playing #hud{ top:39px; }
+  body.mmq-playing #endGame{ top:39px; }
   body.mmq-playing .hud-chip{ min-height:30px; padding:3px 6px; font-size:12px; }
   body.mmq-playing #endGame{ min-height:30px; padding:3px 8px; }
   body.mmq-playing .mobile-game-controls button{ height:44px; min-height:44px; }
